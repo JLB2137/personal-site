@@ -6,7 +6,8 @@ import styles from '../styles/Home.module.css'
 const Home: NextPage = () => {
   return (
     <div className='Home'>
-      <h1>Welcome to my Home Page</h1>
+      <h1>Jeremee Bornstein</h1>
+      <h3>Digit Commerce, Engineer... Plant Dad</h3>
     </div>
   )
 }
