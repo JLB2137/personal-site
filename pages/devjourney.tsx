@@ -7,4 +7,4 @@ const Development = () => {
     )
   }
 
-  export default Development
+export default Development
