@@ -20,3 +20,41 @@ a {
 .nameHeader {
   font-weight: lighter;
 }
+
+.switch {
+  display: grid;
+  grid-template-columns: 1;
+  grid-template-rows: 4;
+  justify-content: flex-start;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.border {
+  background-color: black;
+}
+
+.switch[data-ison="true"] {
+  left: -15%
+}
+
+@media (max-width: 1500px) {
+  .switch[data-ison="true"] {
+    left: -25%
+  }
+}
+
+
+
+@media (max-width: 600px) {
+  .switch[data-ison="true"] {
+    left: -60%
+  }
+}
+
+@media (max-width: 400px) {
+  .switch[data-ison="true"] {
+    left: -90%
+  }
+}
