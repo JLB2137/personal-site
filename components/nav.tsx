@@ -36,10 +36,11 @@ const Nav = (props: Props) => {
                     :
                     <div></div>
                 }
-                <div className="font-name justify-self-end text-6xl text-white" >
+                <div className="grid justify-items-end text-white" >
                     <Link href="/">
-                        <a>JEREMEE</a>
+                        <a className='text-6xl font-name'>JEREMEE</a>
                     </Link>
+                    <p className='justify-items-end text-sm mr-3'>E-Commerce Specialist, Engineer, Plant Dad</p>
                 </div>
                 
             </div>
