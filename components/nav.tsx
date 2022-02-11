@@ -1,7 +1,13 @@
 import Link from 'next/link';
 import {motion} from 'framer-motion';
 
-const Nav = (props) => {
+interface Props {
+    setNavOpen: boolean,
+    navOpen: boolean
+}
+
+
+const Nav = (props: Props) => {
 
     const setDropdown = () => {
         props.navOpen ? props.setNavOpen(false) : props.setNavOpen(true)
@@ -15,27 +21,22 @@ const Nav = (props) => {
         default: { duration: 1 }
     };
 
-    const HamburgerNav = () => {
-        return( 
-            <div className='justify-start ml-10 text-neutral-500 font-bold'>
-                <Link href=''>
-                    <a className='hover:text-black text-4xl' onClick={()=> setDropdown()}>≡</a>
-                </Link>
-            </div>
-        )
-    }
 
 
     return (
         <div>
-            <div className="font-header font-light grid grid-cols-2">
+            <div className="font-header font-light mx-10 my-5 grid grid-cols-2">
                 {
                     props.navOpen ?
-                    <HamburgerNav />
+                    <div className='justify-start text-white font-bold'>
+                        <Link href=''>
+                            <a className='hover:text-neutral-500 text-6xl' onClick={()=> setDropdown()}>≡</a>
+                        </Link>
+                    </div>
                     :
                     <div></div>
                 }
-                <div className="font-name justify-self-end mr-10 text-4xl" >
+                <div className="font-name justify-self-end text-6xl text-white" >
                     <Link href="/">
                         <a>JEREMEE</a>
                     </Link>
@@ -44,7 +45,7 @@ const Nav = (props) => {
             </div>
             <div data-ison={props.navOpen} className="switch">  
                 <motion.div layout transition={spring}>
-                    <div className="bg-black w-max l-max p-2.5">
+                    <div className="bg-black w-max l-max p-2.5 rounded-r-md">
                         <div className='row-span-1 justify-start mb-5 text-neutral-500 font-bold'>    
                             <Link href=''>
                                 <a className='hover:text-white text-4xl' onClick={()=> setDropdown()}>X</a>
@@ -65,7 +66,7 @@ const Nav = (props) => {
                         </div>
                     </div>
                 </motion.div>
-                </div>
+            </div>
         </div>
         
     )

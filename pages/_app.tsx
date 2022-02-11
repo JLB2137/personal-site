@@ -6,7 +6,7 @@ import Nav from '../components/nav'
 
 function MyApp({ Component, pageProps }: AppProps) {
   
-  const [navOpen,setNavOpen] = useState(false)
+  const [navOpen,setNavOpen] = useState(true)
 
   return (
     <div>

@@ -39,6 +39,10 @@ a {
   left: -15%
 }
 
+img {
+  z-index: -1;
+}
+
 @media (max-width: 1500px) {
   .switch[data-ison="true"] {
     left: -25%
