@@ -22,29 +22,60 @@ const Nav = (props: Props) => {
     };
 
 
+    const hamburgerSpring = () => {
+        if (props.navOpen===false){
+            return({
+                delay: 0,
+                ease: "easeout",
+                default: { duration: .5 }
+            })
+        } else {
+            return({
+                delay: 1,
+                ease: "easein",
+                default: { duration: 1 }
+            })
+        }
+    }
+
+    const fadeIn = {
+        visible: { opacity: 1 },
+        hidden: { opacity: 0 },
+    }
+
+    const fadeInCheck = () => {
+        if (props.navOpen===false) {
+            return("hidden")
+        } else {
+            return("visible")
+        }
+    }
+
+
 
     return (
         <div>
             <div className="font-header font-light mx-10 my-5 grid grid-cols-2">
-                {
-                    props.navOpen ?
-                    <div className='justify-start text-white font-bold'>
-                        <Link href=''>
-                            <a className='hover:text-neutral-500 text-6xl' onClick={()=> setDropdown()}>≡</a>
-                        </Link>
-                    </div>
-                    :
-                    <div></div>
-                }
+                <div data-ison={!props.navOpen} id='hamburgerSwitch'>
+                    <motion.div initial="visible" animate={fadeInCheck()} variants={fadeIn} transition={hamburgerSpring()}>
+                        <div className='justify-start text-white font-bold'>
+                            <Link href=''>
+                                <a className='hover:text-neutral-500 text-6xl' onClick={()=> setDropdown()}>≡</a>
+                            </Link>
+                        </div>
+                    </motion.div>
+                </div>
                 <div className="grid justify-items-end text-white" >
-                    <Link href="/">
-                        <a className='text-6xl font-name'>JEREMEE</a>
-                    </Link>
-                    <p className='justify-items-end text-sm mr-3'>E-Commerce Specialist, Engineer, Plant Dad</p>
+                    <div className='grid w-fit'>
+                        <Link href="/">
+                            <a className='text-6xl font-name'>JEREMEE</a>
+                        </Link>
+                        <p className='text-sm mx-auto'>E-Commerce Specialist, Engineer, Plant Dad</p>
+                    </div>
                 </div>
                 
             </div>
-            <div data-ison={props.navOpen} className="switch">  
+            <div data-ison={props.navOpen} id="drawerSwitch">  
                 <motion.div layout transition={spring}>
                     <div className="bg-black w-max l-max p-2.5 rounded-r-md">
                         <div className='row-span-1 justify-start mb-5 text-neutral-500 font-bold'>    
@@ -58,8 +89,16 @@ const Nav = (props: Props) => {
                             </Link>
                         </div>
                         <div className='row-span-1 justify-center mb-2.5 mx-auto text-neutral-500 font-bold'>
-                            <Link href="/hobbies/plants ">
+                            <Link href="/hobbies/plants">
                                 <a className='hover:text-white text-base' onClick={()=> setDropdown()}>PLANTS</a>
+                            </Link>
+                        </div>
+                        <div className='grid grid-cols-2 invert w-20 justify-center mx-auto gap-x-4'>
+                            <Link href='https://www.linkedin.com/in/jeremee-bornstein/' passHref>
+                                <a target="_blank"><img src='/linkedin.png' /></a>
+                            </Link>
+                            <Link href='https://github.com/JLB2137' passHref>
+                                <a target="_blank"><img src='/github.png' /></a>
                             </Link>
                         </div>
                         <div className='row-span-1 justify-center mx-auto mt-auto mb-0 text-neutral-500 align-bottom align-text-bottom '>

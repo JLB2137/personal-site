@@ -21,7 +21,7 @@ a {
   font-weight: lighter;
 }
 
-.switch {
+#drawerSwitch {
   display: grid;
   grid-template-columns: 1;
   grid-template-rows: 4;
@@ -31,15 +31,17 @@ a {
   left: 0;
 }
 
+#drawerSwitch[data-ison="true"] {
+  left: -15%
+}
+
+
 .border {
   background-color: black;
 }
 
-.switch[data-ison="true"] {
-  left: -15%
-}
 
-img {
+#homePageImage {
   z-index: -1;
 }
 
