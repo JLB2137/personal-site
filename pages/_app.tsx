@@ -1,12 +1,29 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import Nav from '../components/nav'
 
 
 function MyApp({ Component, pageProps }: AppProps) {
   
+
+
   const [navOpen,setNavOpen] = useState(true)
+  const [screenWidth, setScreenWidth] = useState(0)
+
+
+  const grabScreenWidth = () => {
+    try {
+      setScreenWidth(window.screen.availWidth)
+    }
+    catch {
+
+    }
+  }
+
+  useEffect(()=> {
+    grabScreenWidth()
+  })
 
   return (
     <div>
@@ -14,7 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       navOpen={navOpen}
       setNavOpen={setNavOpen}
       />
-      <Component {...pageProps} />
+      <Component {...pageProps} screenWidth={screenWidth} />
     </div>
   )
 }

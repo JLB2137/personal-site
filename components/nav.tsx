@@ -66,7 +66,7 @@ const Nav = (props: Props) => {
                     </motion.div>
                 </div>
                 <div className="grid justify-items-end text-white" >
-                    <div className='grid w-fit'>
+                    <div className='grid w-fit sm:pr-5'>
                         <Link href="/">
                             <a className='text-6xl font-name'>JEREMEE</a>
                         </Link>
