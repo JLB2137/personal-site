@@ -1,9 +1,12 @@
 const Plants = () => {
     return (
-      <div className='Plants'>
-        <h1>Plant Dad</h1>
+        <div className="grid grid-rows-max grid-cols-max h-fit pb-20">
+            <img  className="row-start-1 brightness-75" src='/plants/tomatoe.png'/>
+            <img  className="row-start-2" src='/plants/tomatoe.png'/>
+        </div>
         
-      </div>
+        
+         
     )
   }
 

@@ -54,23 +54,23 @@ const Nav = (props: Props) => {
 
 
     return (
-        <div>
-            <div className="font-header font-light mx-10 my-5 grid grid-cols-2">
+        <div className="relative z-10">
+            <div className="grid grid-cols-2 font-header font-light lg:mx-10 lg:my-5 sm:mt-5 sm:mx-5">
                 <div data-ison={!props.navOpen} id='hamburgerSwitch'>
                     <motion.div initial="visible" animate={fadeInCheck()} variants={fadeIn} transition={hamburgerSpring()}>
                         <div className='justify-start text-white font-bold'>
                             <Link href=''>
-                                <a className='hover:text-neutral-500 text-6xl' onClick={()=> setDropdown()}>≡</a>
+                                <a className='hover:text-neutral-500 text-6xl sm:text-4xl' onClick={()=> setDropdown()}>≡</a>
                             </Link>
                         </div>
                     </motion.div>
                 </div>
-                <div className="grid justify-items-end text-white" >
-                    <div className='grid w-fit sm:pr-5'>
+                <div className="grid justify-end text-white" >
+                    <div className='grid w-fit'>
                         <Link href="/">
-                            <a className='text-6xl font-name'>JEREMEE</a>
+                            <a id="name" className='text-6xl font-name sm:text-4xl sm:w-fit sm:-mb-2'>JEREMEE</a>
                         </Link>
-                        <p className='text-sm mx-auto'>E-Commerce Specialist, Engineer, Plant Dad</p>
+                        <p className="text-sm mx-auto sm:text-xxs">E-Commerce Specialist, Engineer, Plant Dad</p>
                     </div>
                 </div>
                 

@@ -6,20 +6,35 @@ module.exports = {
       "header": ["Helvetica"],
       "name": ["Arial Black,Arial Bold,Gadget,sans-serif; "]
     },
+    fontSize: {
+      'xxs': '.5rem',
+      'xs': '.75rem',
+      'sm': '.875rem',
+      'tiny': '.875rem',
+      'base': '1rem',
+      'lg': '1.125rem',
+      'xl': '1.25rem',
+      '2xl': '1.5rem',
+      '3xl': '1.875rem',
+      '4xl': '2.25rem',
+      '5xl': '3rem',
+      '6xl': '4rem',
+      '7xl': '5rem',
+    },
     screens: {
-      'sm': {'max':'640px'},
-      // => @media (min-width: 640px) { ... }
+      'sm': {'min': '300px', 'max': '600px'},
+      // => @media (min-width: 640px and max-width: 767px) { ... }
 
-      'md': {'max':'1024px'},
-      // => @media (min-width: 768px) { ... }
+      'md': {'min': '600px', 'max': '900px'},
+      // => @media (min-width: 768px and max-width: 1023px) { ... }
 
-      'lg': {'max':'3000px'},
-      // => @media (min-width: 1024px) { ... }
+      'lg': {'min': '901px', 'max': '3000px'},
+      // => @media (min-width: 1024px and max-width: 1279px) { ... }
 
-      'xl': {'max':'1280px'},
-      // => @media (min-width: 1280px) { ... }
+      'xl': {'min': '1280px', 'max': '1535px'},
+      // => @media (min-width: 1280px and max-width: 1535px) { ... }
 
-      '2xl': {'max':'1536px'},
+      '2xl': {'min': '1536px'},
       // => @media (min-width: 1536px) { ... }
     },
     backgroundImage: {
