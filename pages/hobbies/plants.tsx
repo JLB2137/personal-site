@@ -1,9 +1,14 @@
 const Plants = () => {
     return (
-        <div className="grid grid-rows-max grid-cols-max h-fit pb-20">
-            <img  className="row-start-1 brightness-75" src='/plants/tomatoe.png'/>
-            <img  className="row-start-2" src='/plants/tomatoe.png'/>
+        <div>
+            <div className="absolute top-0 bg-amber-50 w-screen h-screen">        
+            </div>
+            <div className="relative grid grid-rows-2 grid-cols-2 w-56 h-fit mx-auto my-auto">
+                <img  className="row-start-1 brightness-75" src='/plants/tomatoe.png'/>
+                <img  className="row-start-1" src='/plants/tomatoe.png'/>
+            </div>
         </div>
+
         
         
          
