@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   })
 
   return (
-    <div>
+    <div className='bg-amber-50'>
       <Nav 
       navOpen={navOpen}
       setNavOpen={setNavOpen}

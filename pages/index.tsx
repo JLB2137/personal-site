@@ -6,7 +6,7 @@ import styles from '../styles/Home.module.css'
 const Home: NextPage = (props) => {
   return (
     <div className='grid grid-cols-1'>
-      <img id="homePageImage" className="h-screen w-screen brightness-75 absolute top-0" src={props.screenWidth && props.screenWidth < 600 ? 'home_image_mobile.jpg' : 'home_image.jpg'}/>
+      <img className="h-screen w-screen h-screen brightness-75 absolute top-0" src={props.screenWidth && props.screenWidth < 600 ? 'home_image_mobile.jpg' : 'home_image.jpg'}/>
     </div>
   )
 }

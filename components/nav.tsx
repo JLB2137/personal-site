@@ -55,7 +55,7 @@ const Nav = (props: Props) => {
 
     return (
         <div className="relative z-10">
-            <div className="grid grid-cols-2 font-header font-light lg:mx-10 lg:my-5 sm:mt-5 sm:mx-5">
+            <div className="grid grid-cols-2 font-header font-light lg:px-10 lg:py-5 sm:pt-5 sm:px-5">
                 <div data-ison={!props.navOpen} id='hamburgerSwitch'>
                     <motion.div initial="visible" animate={fadeInCheck()} variants={fadeIn} transition={hamburgerSpring()}>
                         <div className='justify-start text-white font-bold'>
