@@ -2,7 +2,7 @@ import Link from 'next/link';
 import {motion} from 'framer-motion';
 
 interface Props {
-    setNavOpen: boolean,
+    setNavOpen: (navOpen: boolean) => void,
     navOpen: boolean
 }
 
