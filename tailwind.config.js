@@ -39,7 +39,7 @@ module.exports = {
     },
     backgroundImage: {
       'hero': "url('/home_image.jpg')",
-      'footer-texture': "url('/img/footer-texture.png')",
+      'plant': "url('/plants/tomatoe.png')",
     },
     extend: {},
   },
