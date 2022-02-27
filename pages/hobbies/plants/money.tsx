@@ -1,10 +1,6 @@
 const Money = () => {
     return (
         <div className="pt-14">
-            <div>
-                <button>games</button>
-                <svg xmlns="http://www.w3.org/2000/svg" className="text-white"></svg>
-            </div>
             <div id="header" className="grid justify-center text-white">
                 <h1 className="font-bold sm:text-3xl">Money Tree</h1>
                 <h5 className="italic sm:text-sm sm:text-center">Pachira aquatica</h5>

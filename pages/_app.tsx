@@ -6,11 +6,12 @@ import Nav from '../components/nav'
 
 function MyApp({ Component, pageProps }: AppProps) {
   
-
+  interface screenWidthProp {
+    screenWidth: number
+  }
 
   const [navOpen,setNavOpen] = useState(true)
   const [screenWidth, setScreenWidth] = useState(0)
-
 
   const grabScreenWidth = () => {
     try {
@@ -31,7 +32,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       navOpen={navOpen}
       setNavOpen={setNavOpen}
       />
-      <Component {...pageProps} screenWidth={screenWidth} />
+      <Component {...pageProps} screenWidth={screenWidth}/>
     </div>
   )
 }
