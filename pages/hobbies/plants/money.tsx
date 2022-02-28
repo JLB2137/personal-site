@@ -61,7 +61,7 @@ const Money = () => {
                 <h1 className="font-bold sm:text-3xl">Money Tree</h1>
                 <h5 className="italic sm:text-sm sm:text-center">Pachira aquatica</h5>
             </div>
-            <div className="grid justify-center sm:pt-10">
+            <div className="grid justify-center sm:pt-10 overflow-hidden">
                 <motion.div drag="x" dragConstraints={{ left: 0, right: 0 }} onDragStart={(event, info) => positionLocator(info)} onDragEnd={(event, info) => onDrag(info)}>
                     <img className="border-white sm:border-8 sm:h-96" src={image}/>
                 </motion.div>
