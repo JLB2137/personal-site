@@ -8,7 +8,6 @@ const Money = () => {
     interface types {
         imageIterator: number,
         setImageIterator: (imageIterator: number) => void,
-        info: PanInfo,
         imageArray: string,
         image: string,
         setImage: (image: string) => void,
@@ -23,11 +22,11 @@ const Money = () => {
     const [initialPosition, setInitialPosition] = useState(0)
     
     
-    const positionLocator = (info: types) => {
+    const positionLocator = (info: PanInfo) => {
         setInitialPosition(info.point.x)
     }
 
-    const onDrag = (info: types) => {
+    const onDrag = (info: PanInfo) => {
         console.log("iterator",imageIterator)
         //if the image is dragged to the left and is last of stack
         if (initialPosition > info.point.x && image === imageArray[imageArray.length-1]) {
