@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   useEffect(()=> {
     grabScreenWidth()
-  })
+  },[])
 
   return (
     <div className='bg-zinc-600 w-screen h-screen'>

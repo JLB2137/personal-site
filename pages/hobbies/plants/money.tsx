@@ -42,6 +42,19 @@ const Money = () => {
         }
     }
 
+    const carouselPosition = imageArray.map(imageString => {
+        if (imageString === image) {
+            return(
+                <h1 className="text-white sm:mx-1 sm:mt-2">&#9679;</h1>
+            )
+        } else {
+            return(
+                <h1 className="text-white sm:mx-1 sm:mt-2">&#8413;</h1>
+            )
+        }
+
+    })
+
 
     useEffect(()=> {
         setImage(imageArray[imageIterator])
@@ -56,8 +69,10 @@ const Money = () => {
             <div className="grid justify-center sm:pt-10 overflow-hidden">
                 <motion.div drag="x" dragConstraints={{ left: 0, right: 0 }} onDragStart={(event, info) => positionLocator(info)} onDragEnd={(event, info) => onDrag(info)}>
                     <img className="border-white sm:border-8 sm:h-96" src={image}/>
-                </motion.div>
-                
+                </motion.div> 
+            </div>
+            <div className="flex flex-row justify-center">
+                {carouselPosition}
             </div>
             
         </div>
