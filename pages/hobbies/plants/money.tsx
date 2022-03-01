@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, PanInfo } from "framer-motion";
 
 
@@ -13,9 +13,8 @@ const Money = () => {
         setImage: (image: string) => void,
         initalPosition: number,
         setInitialPosition: (initialPosition: number) => void
-      }
+    }
 
-    const constraintsRef = useRef(null);
     const [imageIterator,setImageIterator] = useState(0)
     const imageArray = ['/mobile/plants/money/money_1.png','/mobile/plants/money/money_2.png','/mobile/plants/money/money_3.png','/mobile/plants/money/money_4.png','/mobile/plants/money/money_5.png']
     const [image, setImage] = useState(imageArray[0])
