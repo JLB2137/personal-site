@@ -45,11 +45,11 @@ const Money = () => {
     const carouselPosition = imageArray.map(imageString => {
         if (imageString === image) {
             return(
-                <p className="text-white">&#9679;</p>
+                <p className="text-white sm:mx-2">&#9679;</p>
             )
         } else {
             return(
-                <p className="text-white">&#8413;</p>
+                <p className="text-white sm:mx-2">&#9675;</p>
             )
         }
 
@@ -61,7 +61,7 @@ const Money = () => {
     },[imageIterator])  
 
     return (
-        <div className="pt-14">
+        <div className="pt-5">
             <div id="header" className="grid justify-center text-white">
                 <h1 className="font-bold sm:text-3xl">Money Tree</h1>
                 <h5 className="italic sm:text-sm sm:text-center">Pachira aquatica</h5>
@@ -71,7 +71,7 @@ const Money = () => {
                     <img className="border-white sm:border-8 sm:h-96" src={image}/>
                 </motion.div> 
             </div>
-            <div className="flex flex-row justify-center sm:mt-2">
+            <div className="flex flex-row justify-center w-max mx-auto sm:mt-2">
                 {carouselPosition}
             </div>
             
