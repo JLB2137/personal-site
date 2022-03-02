@@ -45,11 +45,11 @@ const Money = () => {
     const carouselPosition = imageArray.map(imageString => {
         if (imageString === image) {
             return(
-                <p className="text-white sm:mx-5 sm:mt-2">&#9679;</p>
+                <p className="text-white">&#9679;</p>
             )
         } else {
             return(
-                <p className="text-white sm:mx-5 sm:mt-2">&#8413;</p>
+                <p className="text-white">&#8413;</p>
             )
         }
 
@@ -71,7 +71,7 @@ const Money = () => {
                     <img className="border-white sm:border-8 sm:h-96" src={image}/>
                 </motion.div> 
             </div>
-            <div className="flex flex-row justify-center">
+            <div className="flex flex-row justify-center sm:mt-2">
                 {carouselPosition}
             </div>
             
