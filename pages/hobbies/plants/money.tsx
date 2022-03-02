@@ -45,11 +45,11 @@ const Money = () => {
     const carouselPosition = imageArray.map(imageString => {
         if (imageString === image) {
             return(
-                <h1 className="text-white sm:mx-1 sm:mt-2">&#9679;</h1>
+                <p className="text-white sm:mx-1 sm:mt-2">&#9679;</p>
             )
         } else {
             return(
-                <h1 className="text-white sm:mx-1 sm:mt-2">&#8413;</h1>
+                <p className="text-white sm:mx-1 sm:mt-2">&#8413;</p>
             )
         }
 
