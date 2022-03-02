@@ -71,7 +71,7 @@ const Money = () => {
                     <img className="border-white sm:border-8 sm:h-96" src={image}/>
                 </motion.div> 
             </div>
-            <div className="flex flex-row justify-center w-max mx-auto sm:mt-2">
+            <div className="flex flex-row justify-center w-max mx-auto sm:mt-4">
                 {carouselPosition}
             </div>
             
