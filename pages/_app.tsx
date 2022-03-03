@@ -27,7 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   },[])
 
   return (
-    <div className='bg-zinc-600 w-screen h-screen'>
+    <div className='bg-zinc-800 w-screen h-screen'>
       <Nav 
       navOpen={navOpen}
       setNavOpen={setNavOpen}

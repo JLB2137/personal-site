@@ -84,8 +84,8 @@ const Nav = (props: Props) => {
                             </Link>
                         </div>
                         <div className='row-span-1 justify-center mb-2.5 mx-auto text-neutral-500 font-bold'>
-                            <Link href="/devjourney">
-                                <a className='hover:text-white text-base' onClick={()=> setDropdown()}>PROJECTS</a>
+                            <Link href="/portfolio">
+                                <a className='hover:text-white text-base' onClick={()=> setDropdown()}>PORTFOLIO</a>
                             </Link>
                         </div>
                         <div className='row-span-1 justify-center mb-2.5 mx-auto text-neutral-500 font-bold'>
