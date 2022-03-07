@@ -8,6 +8,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@sanity/client": "^3.2.0",
     "framer-motion": "^6.2.6",
     "next": "12.0.10",
     "react": "17.0.2",
