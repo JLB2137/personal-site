@@ -10,9 +10,6 @@ interface propsType {
 }
 
 
-//need to get array of image URLs created before the page gets rendered
-//should be able to handle this by using a use state
-
 
 const Plant = (props:propsType) => {
 
@@ -28,24 +25,23 @@ const Plant = (props:propsType) => {
     }
 
     const [imageIterator,setImageIterator] = useState(0)
-    const [imageArray,setImageArray] = useState()
-    let newArray =[]
+    const [imageArray,setImageArray] = useState([])
     const [image, setImage] = useState()
     const [initialPosition, setInitialPosition] = useState(0)
     const [plant,setPlant] = useState()
-    const query = `*[_type=="plants" && name=="${props.plantSelector}"]`
     
+    //builds the sanity URL for use with image tag
     const urlBuilder = async () => {
-        const newPlant = await sanity.fetch(query)
-        console.log("newPlant", newPlant)
+        const newPlant = await sanity.fetch(`*[_type=="plants" && name=="${props.plantSelector}"]`)
         setPlant(newPlant[0])
     }
     
+    //on drag start, grabs the inital position on the page of the x-axis
     const positionLocator = (info: PanInfo) => {
         setInitialPosition(info.point.x)
     }
 
-    //will only trigger once the 
+    //will only trigger once the gallery drags
     const onDrag = (info: PanInfo) => {
         //if the image is dragged to the left and is last of stack
         if (initialPosition > info.point.x && image === imageArray[imageArray.length-1]) {
@@ -63,39 +59,38 @@ const Plant = (props:propsType) => {
         }
     }
 
+    const imageStackBuilder = () => {
+        if (plant) {
+            let url = []
+            plant.images.map(image => {
+                url.push(imageUrlBuilder(sanity).image(image).url())
+            })
+            setImageArray(url)
+        }
+    }
+
     
+   //on page load download the assets from Sanity
+    useEffect(()=> {
+        urlBuilder()
+    },[])
 
-
-    //used once the image is changed
+    //Once the iterator changes, change the image
     useEffect(()=> {
         if (imageArray) {
             setImage(imageArray[imageIterator])
         }
     },[imageIterator])
     
-    //used when the page loads to grab URLS for images
-    useEffect(()=> {
-        urlBuilder()
-    },[])
+ 
 
     useEffect(() => {
-        if (plant) {
-            console.log("plant", plant)
-            console.log("images",plant.images)
-            plant.images.map(image => {
-                const url = imageUrlBuilder(sanity).image(image).url()
-                console.log("url", url)
-                newArray.push(url)
-            })
-            setImageArray(newArray)
-            console.log("imageArray",imageArray)
-        }
+        imageStackBuilder()
     },[plant])
 
-    useEffect(()=> {
-        if (imageArray) {
-            setImage(imageArray[0])
-        }
+    //once the array changes, we set the image to the first image in the stack
+    useEffect(() => {
+        setImage(imageArray[0])
     },[imageArray])
 
 
@@ -140,7 +135,7 @@ const Plant = (props:propsType) => {
         )
     }
 
-    return imageArray ? loaded() : loading()
+    return imageArray.length > 0 ? loaded() : loading()
     
   }
 
