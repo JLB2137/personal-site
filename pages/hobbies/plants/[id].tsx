@@ -9,6 +9,11 @@ interface propsType {
     setPlantSelector: (plant:string) => void
 }
 
+
+//need to get array of image URLs created before the page gets rendered
+//should be able to handle this by using a use state
+
+
 const Plant = (props:propsType) => {
 
 
