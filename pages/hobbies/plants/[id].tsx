@@ -28,7 +28,8 @@ const Plant = (props:propsType) => {
     }
 
     const [imageIterator,setImageIterator] = useState(0)
-    const imageArray = []
+    const [imageArray,setImageArray] = useState()
+    let newArray =[]
     const [image, setImage] = useState()
     const [initialPosition, setInitialPosition] = useState(0)
     const [plant,setPlant] = useState()
@@ -44,6 +45,7 @@ const Plant = (props:propsType) => {
         setInitialPosition(info.point.x)
     }
 
+    //will only trigger once the 
     const onDrag = (info: PanInfo) => {
         //if the image is dragged to the left and is last of stack
         if (initialPosition > info.point.x && image === imageArray[imageArray.length-1]) {
@@ -61,24 +63,17 @@ const Plant = (props:propsType) => {
         }
     }
 
-    const carouselPosition = imageArray.map(imageString => {
-        if (imageString === image) {
-            return(
-                <p className="text-white sm:mx-2">&#9679;</p>
-            )
-        } else {
-            return(
-                <p className="text-white sm:mx-2">&#9675;</p>
-            )
-        }
-
-    })
+    
 
 
+    //used once the image is changed
     useEffect(()=> {
-        setImage(imageArray[imageIterator])
+        if (imageArray) {
+            setImage(imageArray[imageIterator])
+        }
     },[imageIterator])
     
+    //used when the page loads to grab URLS for images
     useEffect(()=> {
         urlBuilder()
     },[])
@@ -90,20 +85,26 @@ const Plant = (props:propsType) => {
             plant.images.map(image => {
                 const url = imageUrlBuilder(sanity).image(image).url()
                 console.log("url", url)
-                imageArray.push(url)
+                newArray.push(url)
             })
+            setImageArray(newArray)
             console.log("imageArray",imageArray)
-            setImage(imageArray[0])
         }
     },[plant])
+
+    useEffect(()=> {
+        if (imageArray) {
+            setImage(imageArray[0])
+        }
+    },[imageArray])
 
 
     const loaded = () => {
         return (
             <div className="pt-5">
                 <div id="header" className="grid justify-center text-white">
-                    <h1 className="font-bold sm:text-3xl">Money Tree</h1>
-                    <h5 className="italic sm:text-sm sm:text-center">Pachira aquatica</h5>
+                    <h1 className="font-bold sm:text-3xl">{plant.name}</h1>
+                    <h5 className="italic sm:text-sm sm:text-center">{plant.binomial}</h5>
                 </div>
                 <div className="grid justify-center sm:pt-10 overflow-hidden">
                     <motion.div drag="x" dragConstraints={{ left: 0, right: 0 }} onDragStart={(event, info) => positionLocator(info)} onDragEnd={(event, info) => onDrag(info)}>
@@ -111,7 +112,18 @@ const Plant = (props:propsType) => {
                     </motion.div> 
                 </div>
                 <div className="flex flex-row justify-center w-max mx-auto sm:mt-4">
-                    {carouselPosition}
+                    {imageArray.map(imageString => {
+                        if (imageString === image) {
+                            return(
+                                <p className="text-white sm:mx-2">&#9679;</p>
+                            )
+                        } else {
+                            return(
+                                <p className="text-white sm:mx-2">&#9675;</p>
+                            )
+                        }
+
+                    })}
                 </div>
                 
             </div>
@@ -128,7 +140,7 @@ const Plant = (props:propsType) => {
         )
     }
 
-    return plant ? loaded() : loading()
+    return imageArray ? loaded() : loading()
     
   }
 
