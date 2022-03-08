@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
 import { motion, PanInfo } from "framer-motion";
+import imageUrlBuilder from '@sanity/image-url'
+import sanity from '../../../client';
 
+interface propsType {
+    screenWidth: number,
+    plantSelector: string,
+    setPlantSelector: (plant:string) => void
+}
 
-const Plant = () => {
+const Plant = (props:propsType) => {
 
 
     interface types {
@@ -16,10 +23,17 @@ const Plant = () => {
     }
 
     const [imageIterator,setImageIterator] = useState(0)
-    const imageArray = ['/mobile/plants/money/money_1.png','/mobile/plants/money/money_2.png','/mobile/plants/money/money_3.png','/mobile/plants/money/money_4.png','/mobile/plants/money/money_5.png']
-    const [image, setImage] = useState(imageArray[0])
+    const imageArray = []
+    const [image, setImage] = useState()
     const [initialPosition, setInitialPosition] = useState(0)
+    const [plant,setPlant] = useState()
+    const query = `*[_type=="plants" && name=="${props.plantSelector}"]`
     
+    const urlBuilder = async () => {
+        const newPlant = await sanity.fetch(query)
+        console.log("newPlant", newPlant)
+        setPlant(newPlant[0])
+    }
     
     const positionLocator = (info: PanInfo) => {
         setInitialPosition(info.point.x)
@@ -58,29 +72,59 @@ const Plant = () => {
 
     useEffect(()=> {
         setImage(imageArray[imageIterator])
-    },[imageIterator])  
+    },[imageIterator])
+    
+    useEffect(()=> {
+        urlBuilder()
+    },[])
 
-    return (
-        <div className="pt-5">
-            <div id="header" className="grid justify-center text-white">
-                <h1 className="font-bold sm:text-3xl">Money Tree</h1>
-                <h5 className="italic sm:text-sm sm:text-center">Pachira aquatica</h5>
+    useEffect(() => {
+        if (plant) {
+            console.log("plant", plant)
+            console.log("images",plant.images)
+            plant.images.map(image => {
+                const url = imageUrlBuilder(sanity).image(image).url()
+                console.log("url", url)
+                imageArray.push(url)
+            })
+            console.log("imageArray",imageArray)
+            setImage(imageArray[0])
+        }
+    },[plant])
+
+
+    const loaded = () => {
+        return (
+            <div className="pt-5">
+                <div id="header" className="grid justify-center text-white">
+                    <h1 className="font-bold sm:text-3xl">Money Tree</h1>
+                    <h5 className="italic sm:text-sm sm:text-center">Pachira aquatica</h5>
+                </div>
+                <div className="grid justify-center sm:pt-10 overflow-hidden">
+                    <motion.div drag="x" dragConstraints={{ left: 0, right: 0 }} onDragStart={(event, info) => positionLocator(info)} onDragEnd={(event, info) => onDrag(info)}>
+                        <img className="border-white sm:border-8 sm:h-96" src={image}/>
+                    </motion.div> 
+                </div>
+                <div className="flex flex-row justify-center w-max mx-auto sm:mt-4">
+                    {carouselPosition}
+                </div>
+                
             </div>
-            <div className="grid justify-center sm:pt-10 overflow-hidden">
-                <motion.div drag="x" dragConstraints={{ left: 0, right: 0 }} onDragStart={(event, info) => positionLocator(info)} onDragEnd={(event, info) => onDrag(info)}>
-                    <img className="border-white sm:border-8 sm:h-96" src={image}/>
-                </motion.div> 
-            </div>
-            <div className="flex flex-row justify-center w-max mx-auto sm:mt-4">
-                {carouselPosition}
-            </div>
+    
             
-        </div>
+            
+             
+        )
+    }
 
-        
-        
-         
-    )
+    const loading = () => {
+        return(
+            <h1>Loading</h1>
+        )
+    }
+
+    return plant ? loaded() : loading()
+    
   }
 
   export default Plant

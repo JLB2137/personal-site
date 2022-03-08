@@ -12,6 +12,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const [navOpen,setNavOpen] = useState(true)
   const [screenWidth, setScreenWidth] = useState(0)
+  const [plantSelector,setPlantSelector] = useState()
 
   const grabScreenWidth = () => {
     try {
@@ -32,7 +33,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       navOpen={navOpen}
       setNavOpen={setNavOpen}
       />
-      <Component {...pageProps} screenWidth={screenWidth}/>
+      <Component {...pageProps} screenWidth={screenWidth} plantSelector={plantSelector} setPlantSelector={setPlantSelector}/>
     </div>
   )
 }

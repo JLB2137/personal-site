@@ -1,13 +1,21 @@
 import Link from 'next/link';
 import sanity from '../../client';
 import { useEffect, useState } from "react";
-interface screenWidthProp {
-    screenWidth: number
+
+interface propsType {
+    screenWidth: number,
+    plantSelector: string,
+    setPlantSelector: (plant:string) => void
 }
 
-const Plants = (props: screenWidthProp) => {
+const Plants = (props: propsType) => {
 
     const [plants,setPlants] = useState()
+
+    const choosePlant = (plantName:string) => {
+        props.setPlantSelector(plantName)
+        console.log(props.plantSelector)
+    }
 
     
     useEffect(async () => {
@@ -27,7 +35,7 @@ const Plants = (props: screenWidthProp) => {
 
             return(
                 <Link href='/hobbies/plants/[id]' as={`/hobbies/plants/${plant.slug.current}`}>
-                    <button className="italic text-white border-white hover:text-neutral-400 hover:border-neutral-400 sm:border-4 sm:rounded-md sm:text-xl sm:p-1 sm:mb-5">{plant.name}</button>
+                    <button className="italic text-white border-white hover:text-neutral-400 hover:border-neutral-400 sm:border-4 sm:rounded-md sm:text-xl sm:p-1 sm:mb-5" onClick={()=>choosePlant(plant.name)}>{plant.name}</button>
                 </Link>
             )
         })
@@ -40,12 +48,6 @@ const Plants = (props: screenWidthProp) => {
                     </div>
                 </div>
                 <div className="relative grid justify-center items-center mt-10">
-                    <Link href='/hobbies/plants/money'>
-                        <button className="italic text-white border-white hover:text-neutral-400 hover:border-neutral-400 sm:border-4 sm:rounded-md sm:text-xl sm:p-1 sm:mb-5">Money Tree</button>
-                    </Link>
-                    <Link href='/hobbies/plants/palm'>
-                        <button className="italic text-white border-white hover:text-neutral-400 hover:border-neutral-400 sm:border-4 sm:rounded-md sm:text-xl sm:p-1 sm:mb-5">Ponytail Palm</button>
-                    </Link>
                     {linksInput}
                 </div>
             </div>
