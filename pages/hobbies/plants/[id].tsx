@@ -33,6 +33,11 @@ const Plant = (props:propsType) => {
     //builds the sanity URL for use with image tag
     const urlBuilder = async () => {
         const newPlant = await sanity.fetch(`*[_type=="plants" && name=="${props.plantSelector}"]`)
+        let url = []
+        newPlant[0].images.map(image => {
+            url.push(imageUrlBuilder(sanity).image(image).url())
+        })
+        setImageArray(url)
         setPlant(newPlant[0])
     }
     
@@ -59,34 +64,17 @@ const Plant = (props:propsType) => {
         }
     }
 
-    const imageStackBuilder = () => {
-        if (plant) {
-            let url = []
-            plant.images.map(image => {
-                url.push(imageUrlBuilder(sanity).image(image).url())
-            })
-            setImageArray(url)
-        }
-    }
-
     
-   //on page load download the assets from Sanity
+   //on page load fetch the assets from Sanity
     useEffect(()=> {
         urlBuilder()
     },[])
 
     //Once the iterator changes, change the image
     useEffect(()=> {
-        if (imageArray) {
-            setImage(imageArray[imageIterator])
-        }
+        setImage(imageArray[imageIterator])
     },[imageIterator])
     
- 
-
-    useEffect(() => {
-        imageStackBuilder()
-    },[plant])
 
     //once the array changes, we set the image to the first image in the stack
     useEffect(() => {
@@ -135,7 +123,7 @@ const Plant = (props:propsType) => {
         )
     }
 
-    return imageArray.length > 0 ? loaded() : loading()
+    return plant ? loaded() : loading()
     
   }
 
