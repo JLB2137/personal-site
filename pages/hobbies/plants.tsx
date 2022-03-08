@@ -2,39 +2,77 @@ import Link from 'next/link';
 import sanity from '../../client';
 import { useEffect, useState } from "react";
 
+interface imagesType {
+    _key: string,
+    _type: string,
+    asset: {
+      _ref: string,
+      _type: string
+    },
+    imageDate: string
+  }
+
+interface plantsType {
+    _createdAt: string,
+    _id: string,
+    _rev: string,
+    _type: string,
+    _updatedAt: string,
+    acquisitionDate: string,
+    binomial: string,
+    images: imagesType,
+    name: string,
+    slug: { _type: string, current: string },
+}
+
 interface propsType {
     screenWidth: number,
     plantSelector: string,
-    setPlantSelector: (plant:string) => void
+    setPlantSelector: (plant:string) => void,
+    plants: plantsType[]
 }
+
+
+
+export async function getStaticProps() {
+
+
+    const plants: plantsType[] = await sanity.fetch('*[_type == "plants"]')
+    console.log(plants)
+
+
+    return {
+        props: {
+            plants,
+        }
+    }
+}
+
+
 
 const Plants = (props: propsType) => {
 
-    const [plants,setPlants] = useState()
+    
+
 
     const choosePlant = (plantName:string) => {
         props.setPlantSelector(plantName)
         console.log(props.plantSelector)
     }
 
-    
-    useEffect(async () => {
-        setPlants(await sanity.fetch('*[_type == "plants"]'))
-        console.log(await plants)
-
-    },[])
-
-
 
 
     const loaded = () => {
 
-        const linksInput = plants.map(plant => {
+        const linksInput = props.plants.map(plant => {
 
-            console.log(plants)
+            //console.log(props.plants[0].images)
 
             return(
-                <Link href='/hobbies/plants/[id]' as={`/hobbies/plants/${plant.slug.current}`}>
+                <Link href={{
+                    pathname: `/hobbies/plants/[id]`,
+                    query: {id: plant.slug.current}
+                }} key={plant.slug.current}>
                     <button className="italic text-white border-white hover:text-neutral-400 hover:border-neutral-400 sm:border-4 sm:rounded-md sm:text-xl sm:p-1 sm:mb-5" onClick={()=>choosePlant(plant.name)}>{plant.name}</button>
                 </Link>
             )
@@ -61,7 +99,7 @@ const Plants = (props: propsType) => {
     }
 
 
-    return plants ? loaded() : loading()
+    return props.plants ? loaded() : loading()
 
         
         

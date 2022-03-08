@@ -59,9 +59,7 @@ const Nav = (props: Props) => {
                 <div data-ison={!props.navOpen} id='hamburgerSwitch'>
                     <motion.div initial="visible" animate={fadeInCheck()} variants={fadeIn} transition={hamburgerSpring()}>
                         <div className='justify-start text-white font-bold'>
-                            <Link href=''>
-                                <a className='hover:text-neutral-500 text-6xl sm:text-4xl' onClick={()=> setDropdown()}>≡</a>
-                            </Link>
+                            <button className='hover:text-neutral-500 text-6xl sm:text-4xl' onClick={()=> setDropdown()}>≡</button>
                         </div>
                     </motion.div>
                 </div>
@@ -79,9 +77,7 @@ const Nav = (props: Props) => {
                 <motion.div layout transition={spring}>
                     <div className="bg-black w-max l-max p-2.5 rounded-r-md">
                         <div className='row-span-1 justify-start mb-5 text-neutral-500 font-bold'>    
-                            <Link href=''>
-                                <a className='hover:text-white text-4xl' onClick={()=> setDropdown()}>X</a>
-                            </Link>
+                            <button className='hover:text-white text-4xl' onClick={()=> setDropdown()}>X</button>
                         </div>
                         <div className='row-span-1 justify-center mb-2.5 mx-auto text-neutral-500 font-bold'>
                             <Link href="/portfolio">
