@@ -119,32 +119,42 @@ const Plant = (props:PropsType) => {
     },[props.imageArray])
 
 
-    return (
-        <div className="pt-5">
-            <div id="header" className="grid justify-center text-white">
-                <h1 className="font-bold sm:text-3xl">{props.plant.name}</h1>
-                <h5 className="italic sm:text-sm sm:text-center">{props.plant.binomial}</h5>
+    const loaded = () => {
+        return (
+            <div className="pt-5">
+                <div id="header" className="grid justify-center text-white">
+                    <h1 className="font-bold sm:text-3xl">{props.plant.name}</h1>
+                    <h5 className="italic sm:text-sm sm:text-center">{props.plant.binomial}</h5>
+                </div>
+                <div className="grid justify-center sm:pt-10 overflow-hidden">
+                    <motion.div drag="x" dragConstraints={{ left: 0, right: 0 }} onDragStart={(event, info) => positionLocator(info)} onDragEnd={(event, info) => onDrag(info)}>
+                        <img className="border-white sm:border-8 sm:h-96" src={image}/>
+                    </motion.div> 
+                </div>
+                <div className="flex flex-row justify-center w-max mx-auto sm:mt-4">
+                    {props.imageArray.map(imageString => {
+                        if (imageString === image) {
+                            return(
+                                <p className="text-white sm:mx-2">&#9679;</p>
+                            )
+                        } else {
+                            return(
+                                <p className="text-white sm:mx-2">&#9675;</p>
+                            )
+                        }
+                    })}
+                </div>
             </div>
-            <div className="grid justify-center sm:pt-10 overflow-hidden">
-                <motion.div drag="x" dragConstraints={{ left: 0, right: 0 }} onDragStart={(event, info) => positionLocator(info)} onDragEnd={(event, info) => onDrag(info)}>
-                    <img className="border-white sm:border-8 sm:h-96" src={image}/>
-                </motion.div> 
-            </div>
-            <div className="flex flex-row justify-center w-max mx-auto sm:mt-4">
-                {props.imageArray.map(imageString => {
-                    if (imageString === image) {
-                        return(
-                            <p className="text-white sm:mx-2">&#9679;</p>
-                        )
-                    } else {
-                        return(
-                            <p className="text-white sm:mx-2">&#9675;</p>
-                        )
-                    }
-                })}
-            </div>
-        </div>
-    )
+        )
+    }
+    
+    const loading = () => {
+        return <h1>Loading</h1>
+    }
+
+
+    return props.plant ? loaded() : loading()
 }
+
 
 export default Plant
