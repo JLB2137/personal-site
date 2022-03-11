@@ -54,7 +54,7 @@ const Nav = (props: Props) => {
 
     return (
         <div className="relative z-10">
-            <div className="grid grid-cols-2 sm:grid-cols-4 font-header font-light lg:px-10 lg:py-5 sm:pt-5 sm:px-5">
+            <div className="grid grid-cols-2 sm:grid-cols-6 font-header font-light lg:px-10 lg:py-5 sm:pt-5 sm:px-5">
                 <div data-ison={!props.navOpen} id='hamburgerSwitch' className='sm:col-span-1'>
                     <motion.div initial="visible" animate={fadeInCheck()} variants={fadeIn} transition={hamburgerSpring()}>
                         <div className='justify-start text-white font-bold'>
@@ -62,7 +62,7 @@ const Nav = (props: Props) => {
                         </div>
                     </motion.div>
                 </div>
-                <div className="grid justify-end align-middle text-white sm:col-span-3" >
+                <div className="grid justify-end align-middle text-white sm:col-span-5" >
                     <div className='grid w-max align-middle'>
                         <Link href="/">
                             <a id="name" className='text-6xl font-name sm:text-5xl sm:w-fit sm:h-fit sm:-mb-2'>JEREMEE</a>
