@@ -62,7 +62,7 @@ const Nav = (props: Props) => {
                         </div>
                     </motion.div>
                 </div>
-                <div className="grid justify-end align-middle text-white sm:col-span-5 sm:mr-4" >
+                <div className="grid justify-end align-middle text-white sm:col-span-5 sm:mr-2" >
                     <div className='grid w-max align-middle'>
                         <Link href="/">
                             <a id="name" className='text-6xl font-name sm:text-5xl sm:w-fit sm:h-fit sm:-mb-4 sm:mx-auto sm:font-extrabold'>JEREMEE</a>
