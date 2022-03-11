@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { motion, PanInfo } from "framer-motion";
-import imageUrlBuilder from '@sanity/image-url'
+import imageUrlBuilder from '@sanity/image-url';
 import sanity from '../../../client';
-import {GetStaticPropsContext} from 'next'
+import {GetStaticPropsContext} from 'next';
   
 interface ImagesType {
     _key: string,

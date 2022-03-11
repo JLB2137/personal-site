@@ -11,7 +11,6 @@ const Nav = (props: Props) => {
 
     const setDropdown = () => {
         props.navOpen ? props.setNavOpen(false) : props.setNavOpen(true)
-        console.log(props.navOpen)
     }
 
 

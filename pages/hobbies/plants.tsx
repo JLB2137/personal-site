@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import sanity from '../../client';
+import imageUrlBuilder from '@sanity/image-url';
 
 
-interface ImagesType {
+interface ImageType {
     _key: string,
     _type: string,
     asset: {
@@ -10,7 +11,12 @@ interface ImagesType {
       _type: string
     },
     imageDate: string
-  }
+}
+
+interface ImagesType {
+    images: ImageType[]
+}
+        
 
 interface PlantsType {
     _createdAt: string,
@@ -20,7 +26,7 @@ interface PlantsType {
     _updatedAt: string,
     acquisitionDate: string,
     binomial: string,
-    images: ImagesType,
+    images: ImagesType[],
     name: string,
     slug: { _type: string, current: string },
 }
@@ -30,17 +36,25 @@ interface PropsType {
     plantSelector: string,
     setPlantSelector: (plant:string) => void,
     plants: PlantsType[]
+    backgroundImages: string[],
 }
 
 
 
 export async function getStaticProps() {
     //fetch plants from Sanity DB
+    const backgroundImage: ImagesType[] = await sanity.fetch('*[_type == "backgroundImages" && page == "Plants PLP"]{images}')
     const plants: PlantsType[] = await sanity.fetch('*[_type == "plants"]')
+    let images: ImagesType = backgroundImage[0]
+    let backgroundImages: string[] = []
+    images.images.map(image => {
+        backgroundImages.push(imageUrlBuilder(sanity).image(image).url())
+    })
     return {
         //static props return server side as a prop
         props: {
             plants,
+            backgroundImages
         }
     }
 }
@@ -48,6 +62,8 @@ export async function getStaticProps() {
 
 
 const Plants = (props: PropsType) => {
+
+
 
     const linksToPlantPDP = props.plants.map(plant => {
 
@@ -65,7 +81,7 @@ const Plants = (props: PropsType) => {
         <div>
             <div className="bg-zinc-600 absolute top-0">
                 <div className="bg-zinc-600 mx-auto grid grid-rows-max grid-cols-2 sm:grid-cols-2 sm:gap-5">
-                    <img className="brightness-75 row-start-1 col-span-2 sm:h-screen sm:w-max" src={props.screenWidth && props.screenWidth < 600 ? '/plants/tomatoe_mobile.png' : '/plants/tomatoe.png'}/>
+                    <img className="brightness-75 row-start-1 col-span-2 sm:h-screen sm:w-screen" src={props.screenWidth && props.screenWidth < 600 ? props.backgroundImages[1] : props.backgroundImages[0]}/>
                 </div>
             </div>
             <div className="relative grid justify-center items-center mt-10">
