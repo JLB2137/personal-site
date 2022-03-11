@@ -58,7 +58,7 @@ const Nav = (props: Props) => {
                 <div data-ison={!props.navOpen} id='hamburgerSwitch' className='sm:col-span-1'>
                     <motion.div initial="visible" animate={fadeInCheck()} variants={fadeIn} transition={hamburgerSpring()}>
                         <div className='justify-start text-white font-bold'>
-                            <button className='hover:text-neutral-500 text-6xl sm:text-6xl' onClick={()=> setDropdown()}>≡</button>
+                            <button className='hover:text-neutral-500 text-6xl sm:-mt-5 sm:text-6xl' onClick={()=> setDropdown()}>≡</button>
                         </div>
                     </motion.div>
                 </div>
