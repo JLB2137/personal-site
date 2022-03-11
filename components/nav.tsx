@@ -58,16 +58,16 @@ const Nav = (props: Props) => {
                 <div data-ison={!props.navOpen} id='hamburgerSwitch'>
                     <motion.div initial="visible" animate={fadeInCheck()} variants={fadeIn} transition={hamburgerSpring()}>
                         <div className='justify-start text-white font-bold'>
-                            <button className='hover:text-neutral-500 text-6xl sm:text-4xl' onClick={()=> setDropdown()}>≡</button>
+                            <button className='hover:text-neutral-500 text-6xl sm:text-6xl' onClick={()=> setDropdown()}>≡</button>
                         </div>
                     </motion.div>
                 </div>
                 <div className="grid justify-end text-white" >
                     <div className='grid w-fit'>
                         <Link href="/">
-                            <a id="name" className='text-6xl font-name sm:text-4xl sm:w-fit sm:-mb-2'>JEREMEE</a>
+                            <a id="name" className='text-6xl font-name sm:text-5xl sm:w-fit sm:h-fit sm:-mb-2'>JEREMEE</a>
                         </Link>
-                        <p className="text-sm mx-auto sm:text-xxs">E-Commerce Specialist, Engineer, Plant Dad</p>
+                        <p className="text-sm mx-auto sm:text-xs">E-Commerce Specialist, Engineer, Plant Dad</p>
                     </div>
                 </div>
                 
