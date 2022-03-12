@@ -121,12 +121,12 @@ const Plant = (props:PropsType) => {
 
     const loaded = () => {
         return (
-            <div className="pt-5">
-                <div id="header" className="grid justify-center text-white">
+            <div className="pt-10">
+                <div id="header" className="grid justify-left text-white sm:ml-12">
                     <h1 className="font-bold sm:text-3xl">{props.plant.name}</h1>
-                    <h5 className="italic sm:text-sm sm:text-center">{props.plant.binomial}</h5>
+                    <h5 className="italic sm:text-sm">{props.plant.binomial}</h5>
                 </div>
-                <div className="grid justify-center sm:pt-10 overflow-hidden">
+                <div className="grid justify-center sm:pt-5 overflow-hidden">
                     <motion.div drag="x" dragConstraints={{ left: 0, right: 0 }} onDragStart={(event, info) => positionLocator(info)} onDragEnd={(event, info) => onDrag(info)}>
                         <img className="border-white sm:border-8 sm:h-96" src={image}/>
                     </motion.div> 
@@ -135,11 +135,11 @@ const Plant = (props:PropsType) => {
                     {props.imageArray.map(imageString => {
                         if (imageString === image) {
                             return(
-                                <p className="text-white sm:mx-2">&#9679;</p>
+                                <p className="text-white sm:mx-2 sm:text-xs">&#9679;</p>
                             )
                         } else {
                             return(
-                                <p className="text-white sm:mx-2">&#9675;</p>
+                                <p className="text-white sm:mx-2 sm:text-xs">&#9675;</p>
                             )
                         }
                     })}

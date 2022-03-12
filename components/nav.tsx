@@ -17,7 +17,7 @@ const Nav = (props: Props) => {
     const spring = {
         delay: 1,
         x: { type: "spring", stiffness: 100 },
-        default: { duration: 1 }
+        default: { duration: .5 }
     };
 
 
@@ -26,13 +26,13 @@ const Nav = (props: Props) => {
             return({
                 delay: 0,
                 ease: "easeout",
-                default: { duration: .5 }
+                default: { duration: .25 }
             })
         } else {
             return({
                 delay: 1,
                 ease: "easein",
-                default: { duration: 1 }
+                default: { duration: .5 }
             })
         }
     }
