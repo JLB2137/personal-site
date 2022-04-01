@@ -97,7 +97,7 @@ const Nav = (props: Props) => {
                             </Link>
                         </div>
                         <div className='row-span-1 justify-center mx-auto mt-auto mb-0 text-neutral-500 align-bottom align-text-bottom '>
-                            <p className='text-white italic text-sm'>Built by Jeremee Louis Bornstein</p>
+                            <p className='text-white italic text-sm'>Jeremee Louis Bornstein</p>
                         </div>
                     </div>
                 </motion.div>
