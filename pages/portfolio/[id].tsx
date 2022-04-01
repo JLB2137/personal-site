@@ -5,16 +5,33 @@ import sanity from '../../client';
 import Image from 'next/image'
 import {GetStaticPropsContext} from 'next';
   
-interface ImagesType {
+  
+interface Image {
     _key: string,
     _type: string,
     asset: {
-      _ref: string,
-      _type: string
+        _ref: string,
+        _type: string
     },
-    imageDate: string
+    imageName: string
 }
-
+  
+interface Description {
+    _key: string,
+    _type: string,
+    children: [
+      {
+        _key: string,
+        _type: string,
+        marks: [],
+        text: string
+      }
+    ],
+    markDefs: [],
+    style: string
+}
+  
+  
 interface ProjectType {
     _createdAt: string,
     _id: string,
@@ -22,35 +39,19 @@ interface ProjectType {
     _type: string,
     _updatedAt: string,
     completionDate: string,
-    features: FeatureType[],
-    images: ImagesType[],
-    name: string,
+    features: Description[],
+    gitURL: string,
+    images: Image[],
+    projectName: string,
+    projectURL: string,
+    shortDescription: Description[]
     slug: { _type: string, current: string },
-    current: string
+    technology: Description[],
 }
-
-interface PlantType {
-    _createdAt: string,
-    _id: string,
-    _rev: string,
-    _type: string,
-    _updatedAt: string,
-    acquisitionDate: string,
-    binomial: string,
-    images: ImagesType[],
-    name: string,
-    slug: { _type: string, current: string },
-    current: string
-}
-
-interface PropsType {
-    screenWidth: number,
-    plantSelector: string,
-    setPlantSelector: (plant:string) => void,
-    plant: PlantType,
-    imageArray: string[],
+  
+interface Props {
     project: ProjectType,
-
+    images: string[]
 }
 
 
@@ -66,18 +67,15 @@ export function getAllPostIds(slugs: string[]) {
 
 export async function getStaticProps({params}:GetStaticPropsContext) {
     const project: ProjectType = await sanity.fetch(`*[_type=="portfolio" && slug.current=="${params?.id}"][0]`)
-    console.log(project)
-    console.log(project.shortDescription[0])
-    console.log(project.shortDescription[0].children[0].text)
-    let imageArray: string[] = []
+    let images: string[] = []
     project.images.map(image => {
-        imageArray.push(imageUrlBuilder(sanity).image(image).url())
+        images.push(imageUrlBuilder(sanity).image(image).url())
     })
 
     return {
         props: {
             project,
-            imageArray
+            images
         }
     }
 }
@@ -95,7 +93,7 @@ export async function getStaticPaths() {
     };
 }
 
-const Project = (props: PropsType) => {
+const Project = (props: Props) => {
 
     const [imageIterator,setImageIterator] = useState(0)
     const [image, setImage] = useState<string>()
@@ -109,31 +107,31 @@ const Project = (props: PropsType) => {
     //will only trigger once the gallery drags
     const onDrag = (info: PanInfo) => {
         //if the image is dragged to the left and is last of stack
-        if (initialPosition > info.point.x && image === props.imageArray[props.imageArray.length-1]) {
+        if (initialPosition > info.point.x && image === props.images[props.images.length-1]) {
             setImageIterator(0)
         //if image is dragged left but isn't last of stack
-        } else if (initialPosition > info.point.x && image !== props.imageArray[props.imageArray.length-1]) {
+        } else if (initialPosition > info.point.x && image !== props.images[props.images.length-1]) {
             //grab the last index value of the array
             setImageIterator(imageIterator+1)
         //if image is dragged right and is first in stack
-        } else if (initialPosition < info.point.x && image === props.imageArray[0]){
-            setImageIterator(props.imageArray.length-1)
+        } else if (initialPosition < info.point.x && image === props.images[0]){
+            setImageIterator(props.images.length-1)
         //if image is dragged right and isn't end of stack
-        } else if (initialPosition < info.point.x && image !== props.imageArray[0]) {
+        } else if (initialPosition < info.point.x && image !== props.images[0]) {
             setImageIterator(imageIterator-1)
         }
     }
 
     //Once the iterator changes, change the image
     useEffect(()=> {
-        setImage(props.imageArray[imageIterator])
+        setImage(props.images[imageIterator])
     },[imageIterator])
     
 
     //once the array changes, we set the image to the first image in the stack
     useEffect(() => {
-        setImage(props.imageArray[0])
-    },[props.imageArray])
+        setImage(props.images[0])
+    },[props.images])
 
 
     return(
@@ -150,7 +148,7 @@ const Project = (props: PropsType) => {
                 </motion.div> 
             </div>
             <div className="flex flex-row justify-center w-max mx-auto sm:mt-4">
-                {props.imageArray.map(imageString => {
+                {props.images.map(imageString => {
                     if (imageString === image) {
                         return(
                             <p className="text-white sm:mx-2 sm:text-xs">&#9679;</p>
