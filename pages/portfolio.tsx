@@ -56,6 +56,8 @@ interface ProjectType {
 }
 
 interface Props {
+  imageWidthPLP: number,
+  imageHeightPLP: number,
   screenWidth: string,
   portfolio: ProjectType[]
   images: Images[]
@@ -94,11 +96,14 @@ export async function getStaticProps({params}:GetStaticPropsContext, props: Prop
 const Portfolio = (props: Props) => {
 
   const [opacityChanger, setOpacityChanger] = useState(true)
+  
+  
 
   const variants = {
-    visible: {opacity: 1, display: 'grid'},
-    darker: {opacity: .25},
+    visible: {opacity: 1},
+    darker: {opacity: .2},
     hidden: {opacity: 0, display: 'none'},
+    appear: {display: 'grid'},
   }
 
   const onTap = () => {
@@ -110,28 +115,17 @@ const Portfolio = (props: Props) => {
     }
   }
 
-  
-
-  const projectLoop = () => {
-    props.portfolio.map(project => {
-      console.log(project)
-    })
-  }
-
-  useEffect(()=> {
-    projectLoop()
-  },[])
-
-
 
   return (
-    <div className='pt-10'>
-      <div className='grid justify-left text-white sm:ml-12'>
+    <div className='pt-10 bg-black sm:pb-5'>
+      <div className='grid justify-left text-white sm:ml-5'>
         <h1 className="font-bold sm:text-3xl">Portfolio</h1>
       </div>
       { 
         props.portfolio.map(project => {
-          let projectImage 
+          let projectImage: string
+          
+          
           props.images.map(image => {
             //If viewport is mobile grab the image with mobile_PLP name
             if (props.screenWidth === 'mobile' && image.projectName === project.projectName && image.imageName === 'mobile_PLP') {
@@ -141,12 +135,14 @@ const Portfolio = (props: Props) => {
             }
           })
           return(
-            <div key={project.projectName} className='grid grid-cols-2 justify-center mx-auto sm:mt-5 text-white'>
+            <div key={project.projectName} className='grid grid-cols-2 justify-center mx-auto text-white sm:mt-5 sm:h-max'>
               <div className='relative col-span-2 flex sm:h-full'>
-                <motion.div initial="visible" animate={opacityChanger ? "visible" : "darker"} variants={variants} transition={{ type: "spring", duration: 0.8 }} onTap={onTap}>
-                  <Image src={projectImage} width={300} height={300} layout="intrinsic"/>
+                <motion.div className='px-5' initial="visible" animate={opacityChanger ? "visible" : "darker"} variants={variants} transition={{ type: "spring", duration: 0.8 }} onTap={onTap}>
+                  <div className='flex mx-auto'>
+                    <Image src={projectImage} width={props.imageWidthPLP} height={props.imageHeightPLP} layout="intrinsic"/>
+                  </div>
                 </motion.div>
-                <motion.div className='absolute top-0 left-0 z-10 flex-auto sm:h-full' initial="hidden" animate={opacityChanger ? "hidden" : "visible"} variants={variants} transition={{ type: "spring", duration: 1 }} onTap={onTap}>
+                <motion.div className='absolute top-0 left-0 z-10 flex-auto sm:h-full' initial="hidden" animate={opacityChanger ? "hidden" : ["appear","visible"]} variants={variants} transition={{ type: "spring", duration: 1 }} onTap={onTap}>
                 <div className='flex col-span-2 mx-auto mb-3 items-center'>
                   <a className='underline sm:text-2xl sm:mx-1' href={project.projectURL} target="_blank" rel="noreferrer">{project.projectName}</a>
                   <a className='sm:mx-1 flex items-center' href={project.gitURL} target="_blank" rel="noreferrer">
@@ -162,14 +158,14 @@ const Portfolio = (props: Props) => {
                       })
                     }
                   </div>
-                  <div className='flex col-span-2'>
                     <Link href={{
                         pathname: `/portfolio/[id]`,
                         query: {id: project.slug.current}
                     }} key={project.slug.current}>
-                        <button className="italic text-white border-white mx-auto self-end hover:text-neutral-400 hover:border-neutral-400 sm:my-5 sm:w-40 sm:border-2 sm:rounded-full sm:text-xl">Learn More</button>
+                        <div className='flex col-span-2'>
+                          <button className="italic text-white border-white mx-auto self-end hover:text-neutral-400 hover:border-neutral-400 sm:my-5 sm:w-40 sm:border-2 sm:rounded-full sm:text-xl">Learn More</button>
+                        </div>
                     </Link>
-                  </div>
                 </motion.div>
               </div>
             </div>

@@ -9,12 +9,15 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const [navOpen,setNavOpen] = useState(true)
   const [screenWidth, setScreenWidth] = useState('mobile')
-  const [plantSelector,setPlantSelector] = useState()
+  const [imageHeightPLP, setImageHeightPLP] = useState(0)
+  const [imageWidthPLP, setImageWidthPLP] = useState(0)
 
   const grabScreenWidth = () => {
     try {
       if (window.screen.availWidth < 600) {
         setScreenWidth('mobile')
+        setImageHeightPLP(867)
+        setImageWidthPLP(587)
       } else {
         setScreenWidth('desktop')
       }
@@ -34,7 +37,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       navOpen={navOpen}
       setNavOpen={setNavOpen}
       />
-      <Component {...pageProps} screenWidth={screenWidth} plantSelector={plantSelector} setPlantSelector={setPlantSelector}/>
+      <Component {...pageProps} screenWidth={screenWidth} imageHeightPLP={imageHeightPLP} imageWidthPLP={imageWidthPLP}/>
     </div>
   )
 }

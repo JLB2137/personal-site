@@ -30,8 +30,6 @@ interface PlantType {
 
 interface PropsType {
     screenWidth: number,
-    plantSelector: string,
-    setPlantSelector: (plant:string) => void,
     plant: PlantType,
     imageArray: string[]
 
