@@ -89,7 +89,7 @@ export async function getStaticPaths() {
     
     return {
       paths,
-      fallback: true // false or 'blocking'
+      fallback: false // false or 'blocking'
     };
 }
 
@@ -137,8 +137,8 @@ const Project = (props: Props) => {
     return(
         <div className="pt-10 bg-black">
             <div className='flex col-span-2 justify-center mb-3 items-center'>
-                <a className='text-white font-bold sm:text-3xl' href={props.project?.projectURL} target="_blank" rel="noreferrer">{props.project?.projectName}</a>
-                <a className='mx-1 flex items-center' href={props.project?.gitURL} target="_blank" rel="noreferrer">
+                <a className='text-white font-bold sm:text-3xl' href={props.project.projectURL} target="_blank" rel="noreferrer">{props.project.projectName}</a>
+                <a className='mx-1 flex items-center' href={props.project.gitURL} target="_blank" rel="noreferrer">
                   <Image className="invert" src="/github.png" width={25} height={25} layout="fixed" />
                 </a>
             </div>
@@ -148,7 +148,7 @@ const Project = (props: Props) => {
                 </motion.div> 
             </div>
             <div className="flex flex-row justify-center w-max mx-auto sm:mt-4">
-                {props.images.map(imageString => {
+                {props.images?.map(imageString => {
                     if (imageString === image) {
                         return(
                             <p className="text-white sm:mx-2 sm:text-xs">&#9679;</p>
@@ -161,7 +161,7 @@ const Project = (props: Props) => {
                 })}
             </div>
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }} className="flex flex-row justify-center mx-auto sm:mt-4">
-                {props.project.shortDescription.map(description => {
+                {props.project.shortDescription?.map(description => {
                     return(
                         <motion.div key={description.children[0].text} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }}>
                             <p className="text-white sm:mx-2 sm:text-xl text-center">{description.children[0].text}</p>
@@ -171,7 +171,7 @@ const Project = (props: Props) => {
             </motion.div>
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }} className="flex flex-row flex-wrap justify-center w-screen mx-auto sm:mt-4">
                 <p className="text-white underline sm:mx-2 sm:text-2xl text-center">Features</p>
-                {props.project.features.map(feature => {
+                {props.project.features?.map(feature => {
                     return(
                         <motion.div key={feature.children[0].text} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }}>
                             <p className="text-white text-center sm:my-2 sm:mx-2 sm:text-xl">{feature.children[0].text}</p>
@@ -181,7 +181,7 @@ const Project = (props: Props) => {
             </motion.div>
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }} className="flex flex-row flex-wrap justify-center w-screen mx-auto sm:mt-4">
                 <p className="text-white underline sm:mx-2 sm:text-2xl text-center w-screen">Technology</p>
-                {props.project.technology.map(technology => {
+                {props.project.technology?.map(technology => {
                     return(
                         <motion.div key={technology.children[0].text} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }}>
                             <p className="text-white text-center sm:my-2 sm:mx-2 sm:text-xl">{technology.children[0].text}</p>
