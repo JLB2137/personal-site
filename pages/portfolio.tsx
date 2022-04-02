@@ -132,7 +132,7 @@ const Portfolio = (props: Props) => {
             }
           })
           return(
-            <div className='grid grid-cols-2 justify-center mx-auto sm:mt-5 text-white'>
+            <div key={project.projectName} className='grid grid-cols-2 justify-center mx-auto sm:mt-5 text-white'>
               <div className='flex col-span-2 mx-auto mb-3 items-center'>
                 <a className='mx-1' href={project.projectURL} target="_blank" rel="noreferrer">{project.projectName}</a>
                 <a className='mx-1 flex items-center' href={project.gitURL} target="_blank" rel="noreferrer">
@@ -148,7 +148,7 @@ const Portfolio = (props: Props) => {
                     {
                       project.technology.map(technology => {
                           return(
-                            <p className='bg-white text-black self-center sm:px-2 sm:mx-5'>{technology.children[0].text}</p>
+                            <p key={technology.children[0].text} className='bg-white text-black self-center sm:px-2 sm:mx-5'>{technology.children[0].text}</p>
                           )
                       })
                     }
