@@ -50,6 +50,7 @@ interface ProjectType {
 }
   
 interface Props {
+    screenWidth: string,
     project: ProjectType,
     images: string[]
 }
@@ -69,7 +70,10 @@ export async function getStaticProps({params}:GetStaticPropsContext) {
     const project: ProjectType = await sanity.fetch(`*[_type=="portfolio" && slug.current=="${params?.id}"][0]`)
     let images: string[] = []
     project.images.map(image => {
-        images.push(imageUrlBuilder(sanity).image(image).url())
+        if (image.imageName.includes("PLP")) {
+        } else {
+            images.push(imageUrlBuilder(sanity).image(image).url())
+        }
     })
 
     return {
@@ -136,7 +140,7 @@ const Project = (props: Props) => {
 
     return(
         <div className="pt-10 bg-black">
-            <div className='flex col-span-2 justify-center mb-3 items-center'>
+            <div className='flex col-span-2 justify-left mb-3 items-center sm:ml-12'>
                 <a className='text-white font-bold sm:text-3xl' href={props.project.projectURL} target="_blank" rel="noreferrer">{props.project.projectName}</a>
                 <a className='mx-1 flex items-center' href={props.project.gitURL} target="_blank" rel="noreferrer">
                   <Image className="invert" src="/github.png" width={25} height={25} layout="fixed" />

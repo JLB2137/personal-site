@@ -6,7 +6,7 @@ import sanity from '../client';
 import imageUrlBuilder from '@sanity/image-url';
 
 interface PropsType {
-  screenWidth: number,
+  screenWidth: string,
   backgroundImages: string[],
 }
 
@@ -43,7 +43,7 @@ export async function getStaticProps() {
 const Home = (props: PropsType) => {
   return (
     <div className='grid grid-cols-1'>
-      <img className="h-screen w-screen h-screen brightness-75 absolute top-0" src={props.screenWidth && props.screenWidth < 600 ? props.backgroundImages[1] : props.backgroundImages[0]}/>
+      <img className="h-screen w-screen h-screen brightness-75 absolute top-0" src={props.screenWidth && props.screenWidth === 'mobile' ? props.backgroundImages[1] : props.backgroundImages[0]}/>
     </div>
   )
 }

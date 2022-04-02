@@ -32,7 +32,7 @@ interface PlantsType {
 }
 
 interface PropsType {
-    screenWidth: number,
+    screenWidth: string,
     plantSelector: string,
     setPlantSelector: (plant:string) => void,
     plants: PlantsType[]
@@ -81,7 +81,7 @@ const Plants = (props: PropsType) => {
         <div>
             <div className="bg-zinc-600 absolute top-0">
                 <div className="bg-zinc-600 mx-auto grid grid-rows-max grid-cols-2 sm:grid-cols-2 sm:gap-5">
-                    <img className="brightness-75 row-start-1 col-span-2 sm:h-screen sm:w-screen" src={props.screenWidth && props.screenWidth < 600 ? props.backgroundImages[1] : props.backgroundImages[0]}/>
+                    <img className="brightness-75 row-start-1 col-span-2 sm:h-screen sm:w-screen" src={props.screenWidth && props.screenWidth === 'mobile' ? props.backgroundImages[1] : props.backgroundImages[0]}/>
                 </div>
             </div>
             <div className="relative grid justify-center items-center mt-10">

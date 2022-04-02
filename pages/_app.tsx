@@ -6,17 +6,18 @@ import Nav from '../components/nav'
 
 function MyApp({ Component, pageProps }: AppProps) {
   
-  interface screenWidthProp {
-    screenWidth: number
-  }
 
   const [navOpen,setNavOpen] = useState(true)
-  const [screenWidth, setScreenWidth] = useState(0)
+  const [screenWidth, setScreenWidth] = useState('mobile')
   const [plantSelector,setPlantSelector] = useState()
 
   const grabScreenWidth = () => {
     try {
-      setScreenWidth(window.screen.availWidth)
+      if (window.screen.availWidth < 600) {
+        setScreenWidth('mobile')
+      } else {
+        setScreenWidth('desktop')
+      }
     }
     catch {
 
