@@ -12,6 +12,11 @@ interface Images {
   imageName: string
 }
 
+interface StateProps {
+  projectPLPImage: Images[],
+  setProjectPLPImage: (test: Images[]) => void,
+}
+
 interface Image {
   _key: string,
   _type: string,
@@ -60,13 +65,14 @@ interface Props {
   imageHeightPLP: number,
   screenWidth: string,
   portfolio: ProjectType[]
-  images: Images[]
+  images: Images[],
 }
 
 export async function getStaticProps({params}:GetStaticPropsContext, props: Props) {
   //grab all projects from Sanity
   const portfolio: ProjectType[] = await sanity.fetch(`*[_type=="portfolio"]`)
   //create an images array to grab all images and create links using sanity builder
+  const [projectPLPImage,setProjectPLPImage] = useState<StateProps>([])
   let images: Images[] = []
   let imageString: string
   let imageName: string
@@ -85,10 +91,14 @@ export async function getStaticProps({params}:GetStaticPropsContext, props: Prop
     })
   })
 
+  setProjectPLPImage(images)
+
   return {
       props: {
           portfolio,
-          images
+          //can be removed later once useState works
+          images,
+          projectPLPImage
       }
   }
 }
@@ -99,7 +109,10 @@ const Portfolio = (props: Props) => {
   //const [projectImage, setProjectImage] = useState("true")
   
   
-
+  //can be removed later
+  console.log(props.projectPLPImage)
+  
+  
   const variants = {
     visible: {opacity: 1},
     darker: {opacity: .2},
