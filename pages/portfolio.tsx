@@ -72,7 +72,7 @@ export async function getStaticProps({params}:GetStaticPropsContext, props: Prop
   //grab all projects from Sanity
   const portfolio: ProjectType[] = await sanity.fetch(`*[_type=="portfolio"]`)
   //create an images array to grab all images and create links using sanity builder
-  const [projectPLPImage,setProjectPLPImage] = useState<StateProps>([])
+  //const [projectPLPImage,setProjectPLPImage] = useState<StateProps>([])
   let images: Images[] = []
   let imageString: string
   let imageName: string
@@ -91,14 +91,14 @@ export async function getStaticProps({params}:GetStaticPropsContext, props: Prop
     })
   })
 
-  setProjectPLPImage(images)
+  //setProjectPLPImage(images)
 
   return {
       props: {
           portfolio,
           //can be removed later once useState works
           images,
-          projectPLPImage
+          //projectPLPImage
       }
   }
 }
@@ -106,11 +106,13 @@ export async function getStaticProps({params}:GetStaticPropsContext, props: Prop
 const Portfolio = (props: Props) => {
 
   const [opacityChanger, setOpacityChanger] = useState(true)
-  //const [projectImage, setProjectImage] = useState("true")
+  const [projectPLPImage,setProjectPLPImage] = useState(props.images)
+
+
+  useEffect(()=> {
+    console.log("hook results", projectPLPImage)
+  },[])
   
-  
-  //can be removed later
-  console.log(props.projectPLPImage)
   
   
   const variants = {
@@ -137,15 +139,15 @@ const Portfolio = (props: Props) => {
       </div>
       { 
         props.portfolio.map(project => {
-          let projectImage: string = "/github.png"
-          
-          
-          props.images.map(image => {
+          //this is a placeholder value to declare something before it is updated on the render
+          let imageIndex: number = 0
+
+          projectPLPImage.map((image,index) => {
             //If viewport is mobile grab the image with mobile_PLP name
             if (props.screenWidth === 'mobile' && image.projectName === project.projectName && image.imageName === 'mobile_PLP') {
-              projectImage = image.image
+              imageIndex = index
             } else if (props.screenWidth === 'desktop' && image.projectName === project.projectName && image.imageName === 'desktop_PLP') {
-              projectImage = image.image
+              imageIndex = index
             }
           })
           return(
@@ -153,7 +155,7 @@ const Portfolio = (props: Props) => {
               <div className='relative col-span-2 flex sm:h-full'>
                 <motion.div className='px-5' initial="visible" animate={opacityChanger ? "visible" : "darker"} variants={variants} transition={{ type: "spring", duration: 0.8 }} onTap={onTap}>
                   <div className='flex mx-auto'>
-                    <Image src={projectImage} width={props.imageWidthPLP} height={props.imageHeightPLP} layout="intrinsic"/>
+                    <Image src={projectPLPImage[imageIndex].image} width={props.imageWidthPLP} height={props.imageHeightPLP} layout="intrinsic"/>
                   </div>
                 </motion.div>
                 <motion.div className='absolute top-0 left-0 z-10 flex-auto sm:h-full' initial="hidden" animate={opacityChanger ? "hidden" : ["appear","visible"]} variants={variants} transition={{ type: "spring", duration: 1 }} onTap={onTap}>
