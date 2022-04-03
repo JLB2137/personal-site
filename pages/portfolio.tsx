@@ -96,6 +96,7 @@ export async function getStaticProps({params}:GetStaticPropsContext, props: Prop
 const Portfolio = (props: Props) => {
 
   const [opacityChanger, setOpacityChanger] = useState(true)
+  //const [projectImage, setProjectImage] = useState("true")
   
   
 
@@ -123,7 +124,7 @@ const Portfolio = (props: Props) => {
       </div>
       { 
         props.portfolio.map(project => {
-          let projectImage: string
+          let projectImage: string = "/github.png"
           
           
           props.images.map(image => {
