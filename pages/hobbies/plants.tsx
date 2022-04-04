@@ -70,7 +70,7 @@ const Plants = (props: PropsType) => {
                 pathname: `/hobbies/plants/[id]`,
                 query: {id: plant.slug.current}
             }} key={plant.slug.current}>
-                <button className="italic text-white border-white hover:text-neutral-400 hover:border-neutral-400 sm:border-2 sm:rounded-full sm:text-xl sm:p-2 sm:mb-5">{plant.name}</button>
+                <button className="italic text-white border-white hover:text-neutral-400 hover:border-neutral-400 border-4 rounded-full text-3xl p-2 mb-20 sm:border-2 sm:rounded-full sm:text-xl sm:p-2 sm:mb-5">{plant.name}</button>
             </Link>
         )
     })

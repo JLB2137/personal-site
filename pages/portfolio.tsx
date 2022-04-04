@@ -9,8 +9,7 @@ import {motion} from 'framer-motion';
 interface Images {
   projectName: string,
   image: string,
-  imageName: string,
-  imageOpacity: boolean,
+  imageName: string
 }
 
 interface StateProps {
@@ -87,8 +86,7 @@ export async function getStaticProps({params}:GetStaticPropsContext, props: Prop
       images.push({
         projectName: project.projectName,
         image: imageString,
-        imageName: imageName,
-        imageOpacity: true
+        imageName: imageName
       })
     })
   })
@@ -110,6 +108,10 @@ const Portfolio = (props: Props) => {
   const [opacityChanger, setOpacityChanger] = useState(true)
   const [projectPLPImage,setProjectPLPImage] = useState(props.images)
 
+
+  useEffect(()=> {
+    console.log("hook results", projectPLPImage)
+  },[])
   
   
   
@@ -120,16 +122,13 @@ const Portfolio = (props: Props) => {
     appear: {display: 'grid'},
   }
 
-  const onTap = async (index: number) => {
-    if (props.images[index].imageOpacity === true) {
-      props.images[index].imageOpacity = false
-      console.log("indez", index)
+  const onTap = () => {
+    if (opacityChanger === true) {
+      setOpacityChanger(false)
       console.log("false")
     } else {
-      props.images[index].imageOpacity = true
+      setOpacityChanger(true)
     }
-    await setProjectPLPImage(props.images)
-    console.log("prop",projectPLPImage[index].imageOpacity)
   }
 
 
@@ -154,12 +153,12 @@ const Portfolio = (props: Props) => {
           return(
             <div key={project.projectName} className='grid grid-cols-2 justify-center mx-auto text-white sm:mt-5 sm:h-max'>
               <div className='relative col-span-2 flex sm:h-full'>
-                <motion.div className='px-5' initial="visible" animate={projectPLPImage[imageIndex].imageOpacity === true ? "visible" : "darker"} variants={variants} transition={{ type: "spring", duration: 0.8 }} onTap={() => onTap(imageIndex)}>
+                <motion.div className='px-5' initial="visible" animate={opacityChanger ? "visible" : "darker"} variants={variants} transition={{ type: "spring", duration: 0.8 }} onTap={onTap}>
                   <div className='flex mx-auto'>
                     <Image src={projectPLPImage[imageIndex].image} width={props.imageWidthPLP} height={props.imageHeightPLP} layout="intrinsic"/>
                   </div>
                 </motion.div>
-                <motion.div className='absolute top-0 left-0 z-10 flex-auto sm:h-full' initial="hidden" animate={projectPLPImage[imageIndex].imageOpacity === true  ? "hidden" : ["appear","visible"]} variants={variants} transition={{ type: "spring", duration: 1 }} onTap={() => onTap(imageIndex)}>
+                <motion.div className='absolute top-0 left-0 z-10 flex-auto sm:h-full' initial="hidden" animate={opacityChanger ? "hidden" : ["appear","visible"]} variants={variants} transition={{ type: "spring", duration: 1 }} onTap={onTap}>
                 <div className='flex col-span-2 mx-auto mb-3 items-center'>
                   <a className='underline sm:text-2xl sm:mx-1' href={project.projectURL} target="_blank" rel="noreferrer">{project.projectName}</a>
                   <a className='sm:mx-1 flex items-center' href={project.gitURL} target="_blank" rel="noreferrer">

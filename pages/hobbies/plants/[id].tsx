@@ -29,11 +29,12 @@ interface PlantType {
 }
 
 interface PropsType {
-    screenWidth: number,
+    screenWidth: string,
     plant: PlantType,
     imageArray: string[]
 
 }
+
 
 
 export function getAllPostIds(slugs: string[]) {
@@ -119,25 +120,29 @@ const Plant = (props:PropsType) => {
 
     const loaded = () => {
         return (
-            <div className="pt-10">
-                <div id="header" className="grid justify-left text-white sm:ml-12">
-                    <h1 className="font-bold sm:text-3xl">{props.plant.name}</h1>
-                    <h5 className="italic sm:text-sm">{props.plant.binomial}</h5>
+            <div className="pt-10 bg-black h-max">
+                <div id="header" className="grid justify-left text-white ml-96 sm:ml-12">
+                    <h1 className="font-bold text-7xl sm:text-3xl">{props.plant.name}</h1>
+                    <h5 className="italic text-5xl sm:text-sm">{props.plant.binomial}</h5>
                 </div>
-                <div className="grid justify-center sm:pt-5 overflow-hidden">
-                    <motion.div drag="x" dragConstraints={{ left: 0, right: 0 }} onDragStart={(event, info) => positionLocator(info)} onDragEnd={(event, info) => onDrag(info)}>
-                        <img className="border-white sm:border-8 sm:h-96" src={image}/>
+                <div className="flex justify-center overflow-hidden lg:w-3/12 lg:pt-10 mx-auto sm:pt-5">
+                    <motion.div className="w-max h-1/2 mx-auto lg:p-10" drag="x" dragConstraints={{ left: 0, right: 0 }} onDragStart={(event, info) => positionLocator(info)} onDragEnd={(event, info) => onDrag(info)}>
+                        <img className="border-white border-8 h-1/2 lg:mx-auto sm:border-8 sm:h-96" src={image}/>
                     </motion.div> 
                 </div>
                 <div className="flex flex-row justify-center w-max mx-auto sm:mt-4">
                     {props.imageArray.map(imageString => {
-                        if (imageString === image) {
+                        if (imageString === image && props.screenWidth === 'mobile') {
                             return(
                                 <p className="text-white sm:mx-2 sm:text-xs">&#9679;</p>
                             )
+                        } else if (imageString === image && props.screenWidth === 'desktop') {
+                            return(
+                                <p className="text-white lg:mx-4 sm:text-xs">&#11044;</p>
+                            )
                         } else {
                             return(
-                                <p className="text-white sm:mx-2 sm:text-xs">&#9675;</p>
+                                <p className="text-white lg:mx-4 sm:mx-2 sm:text-xs">&#9675;</p>
                             )
                         }
                     })}
