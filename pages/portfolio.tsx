@@ -113,10 +113,29 @@ const Portfolio = (props: Props) => {
     console.log("hook results", projectPLPImage)
   },[])
   
+  const ProjectImage = (imageIndex: number, projectPLPImage: Images[]) => {
+    if(props.screenWidth === 'mobile') {
+      return(
+        <motion.div className='px-5' initial="visible" animate={opacityChanger ? "visible" : "darker"} variants={variants} transition={{ type: "spring", duration: 0.8 }} onTap={onTap}>
+                  <div className='flex mx-auto'>
+                    <Image src={projectPLPImage[imageIndex].image} width={props.imageWidthPLP} height={props.imageHeightPLP} layout="intrinsic"/>
+                  </div>
+        </motion.div>
+      )
+    } else {
+      return(
+        <motion.div className='px-5' initial="visible" animate={opacityChanger ? "visible" : "darker"} variants={variants} transition={{ type: "spring", duration: 0.8 }} onHoverStart={onTap}>
+                  <div className='flex mx-auto'>
+                    <Image src={projectPLPImage[imageIndex].image} width={props.imageWidthPLP} height={props.imageHeightPLP} layout="intrinsic"/>
+                  </div>
+        </motion.div>
+      )
+    }
+  }
   
   
   const variants = {
-    visible: {opacity: 1},
+    visible: {opacity: 1, display: 'grid'},
     darker: {opacity: .2},
     hidden: {opacity: 0, display: 'none'},
     appear: {display: 'grid'},
@@ -133,9 +152,9 @@ const Portfolio = (props: Props) => {
 
 
   return (
-    <div className='pt-10 bg-black sm:pb-5'>
-      <div className='grid justify-left text-white sm:ml-5'>
-        <h1 className="font-bold sm:text-3xl">Portfolio</h1>
+    <div className='pt-10 bg-black sm:pb-5 lg:flex lg:flex-wrap'>
+      <div className='grid justify-left text-white lg:w-full lg:ml-32 sm:ml-5'>
+        <h1 className="font-bold lg:text-7xl sm:text-3xl">Portfolio</h1>
       </div>
       { 
         props.portfolio.map(project => {
@@ -151,38 +170,82 @@ const Portfolio = (props: Props) => {
             }
           })
           return(
-            <div key={project.projectName} className='grid grid-cols-2 justify-center mx-auto text-white sm:mt-5 sm:h-max'>
-              <div className='relative col-span-2 flex sm:h-full'>
-                <motion.div className='px-5' initial="visible" animate={opacityChanger ? "visible" : "darker"} variants={variants} transition={{ type: "spring", duration: 0.8 }} onTap={onTap}>
-                  <div className='flex mx-auto'>
-                    <Image src={projectPLPImage[imageIndex].image} width={props.imageWidthPLP} height={props.imageHeightPLP} layout="intrinsic"/>
-                  </div>
-                </motion.div>
-                <motion.div className='absolute top-0 left-0 z-10 flex-auto sm:h-full' initial="hidden" animate={opacityChanger ? "hidden" : ["appear","visible"]} variants={variants} transition={{ type: "spring", duration: 1 }} onTap={onTap}>
-                <div className='flex col-span-2 mx-auto mb-3 items-center'>
-                  <a className='underline sm:text-2xl sm:mx-1' href={project.projectURL} target="_blank" rel="noreferrer">{project.projectName}</a>
-                  <a className='sm:mx-1 flex items-center' href={project.gitURL} target="_blank" rel="noreferrer">
-                    <Image className="invert" src="/github.png" width={25} height={25} layout="fixed" />
-                  </a>
-                </div>
-                  <div className='col-span-2 flex flex-wrap justify-center mx-auto sm:my-5 sm:text-lg'>
-                    {
-                      project.technology.map(technology => {
-                          return(
-                            <p key={technology.children[0].text} className='text-white self-center sm:px-2 sm:mx-5'>{technology.children[0].text}</p>
-                          )
-                      })
-                    }
-                  </div>
+            <div key={project.projectName} className='justify-center mx-auto text-white lg:pt-10 sm:grid sm:grid-cols-2 sm:mt-5 sm:h-max'>
+              <div className='flex relative lg:flex-wrap sm:col-span-2 sm:h-full'>
+                {props.screenWidth === 'mobile' ?
+                  <motion.div className='px-5' initial="visible" animate={opacityChanger ? "visible" : "darker"} variants={variants} transition={{ type: "spring", duration: 0.8 }} onTap={onTap}>
+                    <div className='flex mx-auto'>
+                      <Image src={projectPLPImage[imageIndex].image} width={props.imageWidthPLP} height={props.imageHeightPLP} layout="intrinsic"/>
+                    </div>
+                  </motion.div>
+
+                  :
+
+                  <motion.div className='sm:px-5' initial="visible" animate={opacityChanger ? "visible" : "darker"} variants={variants} transition={{ type: "spring", duration: 0.8 }} onHoverStart={onTap}>
+                    <div className='flex mx-auto'>
+                      <Image src={projectPLPImage[imageIndex].image} width={props.imageWidthPLP} height={props.imageHeightPLP} layout="intrinsic"/>
+                    </div>
+                  </motion.div>
+
+                }
+                {props.screenWidth === 'mobile' ?
+                  <motion.div className='absolute top-0 left-0 z-10 flex-auto sm:h-full' initial="hidden" animate={opacityChanger ? "hidden" : "visible"} variants={variants} transition={{ type: "spring", duration: 1 }} onTap={onTap}>
+                    <div className='flex col-span-2 mx-auto items-center lg:text-3xl lg:my-5 sm:mb-3'>
+                      <a className='underline mx-auto sm:text-2xl sm:mx-1' href={project.projectURL} target="_blank" rel="noreferrer">{project.projectName}</a>
+                      <a className='sm:mx-1 flex items-center' href={project.gitURL} target="_blank" rel="noreferrer">
+                        <Image className="invert" src="/github.png" width={25} height={25} layout="fixed" />
+                      </a>
+                    </div>
+                    <div className='col-span-2 flex flex-wrap justify-center mx-auto sm:my-5 sm:text-lg'>
+                        {
+                          project.technology.map(technology => {
+                              return(
+                                <p key={technology.children[0].text} className='text-white self-center sm:px-2 sm:mx-5'>{technology.children[0].text}</p>
+                              )
+                          })
+                        }
+                    </div>
                     <Link href={{
                         pathname: `/portfolio/[id]`,
                         query: {id: project.slug.current}
-                    }} key={project.slug.current}>
+                        }} key={project.slug.current}>
                         <div className='flex col-span-2'>
                           <button className="italic text-white border-white mx-auto self-end hover:text-neutral-400 hover:border-neutral-400 sm:my-5 sm:w-40 sm:border-2 sm:rounded-full sm:text-xl">Learn More</button>
                         </div>
                     </Link>
-                </motion.div>
+                  </motion.div>
+
+                  :
+                  
+
+                  <motion.div className='absolute top-0 left-0 z-10 flex-auto lg:w-full lg:h-full sm:h-full' initial="hidden" animate={opacityChanger ? "hidden" : "visible"} variants={variants} transition={{ type: "spring", duration: 1 }} onHoverEnd={onTap}>
+                    <div className='flex col-span-2 mx-auto items-center lg:text-3xl sm:mb-3'>
+                      <a className='underline mx-auto sm:text-2xl sm:mx-1' href={project.projectURL} target="_blank" rel="noreferrer">{project.projectName}</a>
+                      <a className='sm:mx-1 flex items-center' href={project.gitURL} target="_blank" rel="noreferrer">
+                        <Image className="invert" src="/github.png" width={25} height={25} layout="fixed" />
+                      </a>
+                    </div>
+                    <div className='col-span-2 flex flex-wrap justify-center mx-auto sm:my-5 sm:text-lg'>
+                        {
+                          project.technology.map(technology => {
+                              return(
+                                <p key={technology.children[0].text} className='text-white self-center lg:text-2xl lg:px-5 sm:mx-5'>{technology.children[0].text}</p>
+                              )
+                          })
+                        }
+                    </div>
+                    <Link href={{
+                        pathname: `/portfolio/[id]`,
+                        query: {id: project.slug.current}
+                        }} key={project.slug.current}>
+                        <div className='flex col-span-2'>
+                          <button className="italic text-white border-white mx-auto self-end border-2 rounded-full text-3xl py-2 px-8 hover:text-neutral-400 hover:border-neutral-400 sm:my-5 sm:w-40 sm:border-2 sm:rounded-full sm:text-xl">Learn More</button>
+                        </div>
+                    </Link>
+                  </motion.div>
+
+                }
+
               </div>
             </div>
           )

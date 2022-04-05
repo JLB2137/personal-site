@@ -50,6 +50,10 @@ interface ProjectType {
 }
   
 interface Props {
+    githubHeight: number,
+    githubWidth: number,
+    imageWidthPDP: number,
+    imageHeightPDP: number,
     screenWidth: string,
     project: ProjectType,
     images: string[]
@@ -139,56 +143,60 @@ const Project = (props: Props) => {
 
 
     return(
-        <div className="pt-10 bg-black">
-            <div className='flex col-span-2 justify-left mb-3 items-center sm:ml-2'>
-                <a className='text-white font-bold sm:text-3xl' href={props.project.projectURL} target="_blank" rel="noreferrer">{props.project.projectName}</a>
+        <div className="pt-10 bg-black lg:pb-10">
+            <div className='flex col-span-2 justify-left items-center ml-32 sm:ml-2 sm:mb-3'>
+                <a className='text-white font-bold text-7xl sm:text-3xl' href={props.project.projectURL} target="_blank" rel="noreferrer">{props.project.projectName}</a>
                 <a className='mx-3 flex' href={props.project.gitURL} target="_blank" rel="noreferrer">
-                  <Image className="invert" src="/github.png" width={25} height={25} layout="fixed" />
+                  <Image className="invert" src="/github.png" width={props.githubWidth} height={props.githubHeight} layout="fixed" />
                 </a>
             </div>
-            <div className="grid justify-center sm:pt-5 sm:mx-2 overflow-hidden">
-                <motion.div drag="x" dragConstraints={{ left: 0, right: 0 }} onDragStart={(event, info) => positionLocator(info)} onDragEnd={(event, info) => onDrag(info)}>
-                    <Image className="border-white sm:border-8 sm:h-96" width={2633} height={1591} src={image ? image : "/github.png"} layout='intrinsic' />
+            <div className="grid justify-center lg:pt-10 sm:pt-5 sm:mx-2 overflow-hidden">
+                <motion.div className="lg:px-96" drag="x" dragConstraints={{ left: 0, right: 0 }} onDragStart={(event, info) => positionLocator(info)} onDragEnd={(event, info) => onDrag(info)}>
+                    <Image className="border-white sm:border-8 sm:h-96" width={props.imageWidthPDP} height={props.imageHeightPDP} src={image ? image : "/github.png"} layout='intrinsic' />
                 </motion.div> 
             </div>
             <div className="flex flex-row justify-center w-max mx-auto sm:mt-4">
                 {props.images?.map(imageString => {
-                    if (imageString === image) {
+                    if (imageString === image && props.screenWidth === 'mobile') {
                         return(
                             <p className="text-white sm:mx-2 sm:text-xs">&#9679;</p>
                         )
+                    } else if (imageString === image && props.screenWidth === 'desktop') {
+                        return(
+                            <p className="text-white lg:mx-4 sm:text-xs">&#11044;</p>
+                        )
                     } else {
                         return(
-                            <p className="text-white sm:mx-2 sm:text-xs">&#9675;</p>
+                            <p className="text-white lg:mx-4 sm:mx-2 sm:text-xs">&#9675;</p>
                         )
                     }
                 })}
             </div>
-            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }} className="flex flex-row justify-center mx-auto sm:mt-4">
+            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }} className="flex flex-row justify-center mx-auto lg:mt-10 lg:px-32 sm:mt-4">
                 {props.project.shortDescription?.map(description => {
                     return(
                         <motion.div key={description.children[0].text} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }}>
-                            <p className="text-white sm:mx-2 sm:text-xl text-center">{description.children[0].text}</p>
+                            <p className="text-white lg:text-3xl sm:mx-2 sm:text-xl text-center">{description.children[0].text}</p>
                         </motion.div>
                     )
                 })}
             </motion.div>
-            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }} className="flex flex-row flex-wrap justify-center w-screen mx-auto sm:mt-4">
-                <p className="italic text-white underline sm:mx-2 sm:text-2xl text-center">Features</p>
+            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }} className="flex flex-row flex-wrap w-screen lg:mt-10 lg:px-32 sm:mt-4">
+                <p className="italic text-white underline lg:text-5xl sm:mx-2 sm:text-2xl text-center w-screen">Features</p>
                 {props.project.features?.map(feature => {
                     return(
                         <motion.div key={feature.children[0].text} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }}>
-                            <p className="text-white text-center sm:my-2 sm:mx-2 sm:text-xl">{feature.children[0].text}</p>
+                            <p className="text-white text-left lg:text-2xl lg:my-5 sm:my-2 sm:mx-2 sm:text-xl">{feature.children[0].text}</p>
                         </motion.div>
                     )
                 })}
             </motion.div>
-            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }} className="flex flex-row flex-wrap justify-center w-screen mx-auto sm:mt-4">
-                <p className="italic text-white underline sm:mx-2 sm:text-2xl text-center w-screen">Technology</p>
+            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }} className="flex flex-row flex-wrap justify-center w-screen mx-auto lg:mt-10 lg:px-32 sm:mt-4">
+                <p className="italic text-white underline lg:text-5xl sm:mx-2 sm:text-2xl text-center w-screen">Technology</p>
                 {props.project.technology?.map(technology => {
                     return(
                         <motion.div key={technology.children[0].text} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }}>
-                            <p className="text-white text-center sm:my-2 sm:mx-2 sm:text-xl">{technology.children[0].text}</p>
+                            <p className="text-white text-center lg:text-2xl lg:my-5 lg:mx-5 sm:my-2 sm:mx-2 sm:text-xl">{technology.children[0].text}</p>
                         </motion.div>
                     )
                 })}

@@ -121,7 +121,7 @@ const Plant = (props:PropsType) => {
     const loaded = () => {
         return (
             <div className="pt-10 bg-black h-max">
-                <div id="header" className="grid justify-left text-white ml-96 sm:ml-12">
+                <div id="header" className="grid justify-left text-white ml-32 sm:ml-12">
                     <h1 className="font-bold text-7xl sm:text-3xl">{props.plant.name}</h1>
                     <h5 className="italic text-5xl sm:text-sm">{props.plant.binomial}</h5>
                 </div>
