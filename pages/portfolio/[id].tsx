@@ -106,6 +106,8 @@ const Project = (props: Props) => {
     const [imageIterator,setImageIterator] = useState(0)
     const [image, setImage] = useState<string>()
     const [initialPosition, setInitialPosition] = useState(0)
+
+    const imageArray = props.images
     
     //on drag start, grabs the inital position on the page of the x-axis
     const positionLocator = (info: PanInfo) => {
@@ -115,31 +117,31 @@ const Project = (props: Props) => {
     //will only trigger once the gallery drags
     const onDrag = (info: PanInfo) => {
         //if the image is dragged to the left and is last of stack
-        if (initialPosition > info.point.x && image === props.images[props.images.length-1]) {
+        if (initialPosition > info.point.x && image === imageArray[props.images.length-1]) {
             setImageIterator(0)
         //if image is dragged left but isn't last of stack
-        } else if (initialPosition > info.point.x && image !== props.images[props.images.length-1]) {
+        } else if (initialPosition > info.point.x && image !== imageArray[props.images.length-1]) {
             //grab the last index value of the array
             setImageIterator(imageIterator+1)
         //if image is dragged right and is first in stack
-        } else if (initialPosition < info.point.x && image === props.images[0]){
+        } else if (initialPosition < info.point.x && image === imageArray[0]){
             setImageIterator(props.images.length-1)
         //if image is dragged right and isn't end of stack
-        } else if (initialPosition < info.point.x && image !== props.images[0]) {
+        } else if (initialPosition < info.point.x && image !== imageArray[0]) {
             setImageIterator(imageIterator-1)
         }
     }
 
     //Once the iterator changes, change the image
     useEffect(()=> {
-        setImage(props.images[imageIterator])
+        setImage(imageArray[imageIterator])
     },[imageIterator])
     
 
     //once the array changes, we set the image to the first image in the stack
     useEffect(() => {
-        setImage(props.images[0])
-    },[props.images])
+        setImage(imageArray[0])
+    },[])
 
 
     return(
