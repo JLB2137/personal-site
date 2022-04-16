@@ -114,6 +114,7 @@ const Project = (props: Props) => {
         setInitialPosition(info.point.x)
     }
 
+
     //will only trigger once the gallery drags
     const onDrag = (info: PanInfo) => {
         //if the image is dragged to the left and is last of stack
@@ -169,7 +170,7 @@ const Project = (props: Props) => {
                         )
                     } else {
                         return(
-                            <button onClick={()=>setImage(imageArray[index])} className="text-white lg:mx-4 sm:mx-2 sm:text-xs">&#9675;</button>
+                            <button onClick={()=> setImageIterator(index)} className="text-white lg:mx-4 sm:mx-2 sm:text-xs">&#9675;</button>
                         )
                     }
                 })}

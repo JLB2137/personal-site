@@ -131,7 +131,7 @@ const Plant = (props:PropsType) => {
                     </motion.div> 
                 </div>
                 <div className="flex flex-row justify-center w-max mx-auto sm:mt-4">
-                    {props.imageArray.map(imageString => {
+                    {props.imageArray.map((imageString, index) => {
                         if (imageString === image && props.screenWidth === 'mobile') {
                             return(
                                 <p className="text-white sm:mx-2 sm:text-xs">&#9679;</p>
@@ -142,7 +142,7 @@ const Plant = (props:PropsType) => {
                             )
                         } else {
                             return(
-                                <p className="text-white lg:mx-4 sm:mx-2 sm:text-xs">&#9675;</p>
+                                <button onClick={()=> setImageIterator(index)} className="text-white lg:mx-4 sm:mx-2 sm:text-xs">&#9675;</button>
                             )
                         }
                     })}
