@@ -158,7 +158,7 @@ const Project = (props: Props) => {
                 </motion.div> 
             </div>
             <div className="flex flex-row justify-center w-max mx-auto sm:mt-4">
-                {props.images?.map(imageString => {
+                {props.images?.map((imageString,index) => {
                     if (imageString === image && props.screenWidth === 'mobile') {
                         return(
                             <p className="text-white sm:mx-2 sm:text-xs">&#9679;</p>
@@ -169,7 +169,7 @@ const Project = (props: Props) => {
                         )
                     } else {
                         return(
-                            <p className="text-white lg:mx-4 sm:mx-2 sm:text-xs">&#9675;</p>
+                            <button onClick={()=>setImage(imageArray[index])} className="text-white lg:mx-4 sm:mx-2 sm:text-xs">&#9675;</button>
                         )
                     }
                 })}
