@@ -107,7 +107,7 @@ const Project = (props: Props) => {
     const [image, setImage] = useState<string>()
     const [initialPosition, setInitialPosition] = useState(0)
 
-    const imageArray = props.images
+    const imageArray: string[] = props.images
     
     //on drag start, grabs the inital position on the page of the x-axis
     const positionLocator = (info: PanInfo) => {
