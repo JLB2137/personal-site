@@ -42,13 +42,13 @@ export async function getStaticProps() {
 
 const Home = (props: PropsType) => {
   return (
-    <div className='flex flex-col absolute top-0 row-span-1 row-start-1'>
+    <div className='flex flex-col absolute top-0'>
       <img className="block brightness-75 h-screen w-screen" src={props.screenWidth && props.screenWidth === 'mobile' ? props.backgroundImages[1] : props.backgroundImages[0]}/>
-      <div className='flex absolute top-0 text-white text-5xl h-screen w-screen z-9 justify-center'>
+      <div className='flex absolute top-0 text-white text-5xl h-screen w-full z-9 justify-center'>
         <h1 className='self-center'><a href='#about-me'>ABOUT MEE</a></h1>
       </div>
-      <div className='flex bg-black text-white z-10 h-screen justify-center content-center lg:text-3xl sm:px-2 sm:text-xl text-center lg:py-5 lg:px-5 sm:py-2 sm:px-2'>
-        <p className='flex justify-center self-center' id='about-me'>I graduated from Tufts University in 2019 with a Bachelors in Science in Biomedical Engineering.
+      <div className='flex bg-black text-white z-10 h-screen justify-center content-center '>
+        <p className='flex justify-center self-center lg:text-3xl sm:px-2 sm:text-xl text-center lg:py-5 lg:px-5 sm:py-2 sm:px-2' id='about-me'>I graduated from Tufts University in 2019 with a Bachelors in Science in Biomedical Engineering.
           Since then I have used my engineering skills to pursue my passions including my transition into web development.
           I spent September 2021 through April 2022 taking the General Assembly Full-Stack Web Development to get acquianted
           with the latest tools and frameworks. I spend my free time building web apps
