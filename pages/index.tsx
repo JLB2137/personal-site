@@ -42,8 +42,19 @@ export async function getStaticProps() {
 
 const Home = (props: PropsType) => {
   return (
-    <div className='grid grid-cols-1'>
-      <img className="h-screen w-screen h-screen brightness-75 absolute top-0" src={props.screenWidth && props.screenWidth === 'mobile' ? props.backgroundImages[1] : props.backgroundImages[0]}/>
+    <div className='absolute top-0 row-span-1 row-start-1'>
+      <img className="block brightness-75 h-full w-full" src={props.screenWidth && props.screenWidth === 'mobile' ? props.backgroundImages[1] : props.backgroundImages[0]}/>
+      <div className='flex absolute top-0 text-white text-5xl h-full w-full z-9 justify-center'>
+        <h1 className='self-center'>ABOUT MEE</h1>
+      </div>
+      <div className='bg-black pt-10 text-white z-10'>
+        <p>I graduated from Tufts University in 2019 with a Bachelors in Science in Biomedical Engineering.
+          Since then I have used my engineering skills to pursue my passions including my transition into web development.
+          I spent September 2021 through April 2022 taking the General Assembly Full-Stack Web Development to get acquianted
+          with the latest tools and frameworks. I spend my free time building web apps
+          to help solve problems inlcuding tracking investments and watering my plants!
+        </p>
+      </div>
     </div>
   )
 }

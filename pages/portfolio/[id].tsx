@@ -146,7 +146,7 @@ const Project = (props: Props) => {
 
 
     return(
-        <div className="pt-10 bg-black lg:pb-10 h-screen w-screen">
+        <div className="pt-10 bg-black lg:pb-10">
             <div className='flex col-span-2 justify-left items-center ml-32 sm:ml-2 sm:mb-3'>
                 <a className='text-white font-bold text-7xl sm:text-3xl' href={props.project.projectURL} target="_blank" rel="noreferrer">{props.project.projectName}</a>
                 <a className='mx-3 flex' href={props.project.gitURL} target="_blank" rel="noreferrer">
