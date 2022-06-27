@@ -4,6 +4,7 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import sanity from '../client';
 import imageUrlBuilder from '@sanity/image-url';
+import { motion } from "framer-motion";
 
 interface PropsType {
   screenWidth: string,
@@ -40,6 +41,19 @@ export async function getStaticProps() {
   }
 }
 
+const initial = {
+  opacity: 0
+}
+const final = {
+  opacity: 1
+}
+const viewport = {
+  once: true
+}
+const duration = {
+  duration: 2
+}
+
 const Home = (props: PropsType) => {
   return (
     <div className='flex flex-col absolute top-0'>
@@ -48,15 +62,23 @@ const Home = (props: PropsType) => {
         <h1 className='self-center'><a href='#about-me'>ABOUT MEE</a></h1>
       </div>
       <div className='flex flex-col bg-black text-white z-10 text-center content-center'>
-        <h1 className='text-white font-bold text-7xl sm:text-3xl'>Jeremee Louis Bornstein</h1>
-        <h1 className='text-white text-5xl sm:text-2xl'>Sonos, Inc.</h1>
-        <h1 className='text-white italic text-3xl sm:text-xl'>eCommerce QA Specialist</h1>
-        <p className='flex justify-center self-center lg:text-3xl sm:px-2 sm:text-xl text-center lg:py-5 lg:px-5 sm:py-2 sm:px-2' id='about-me'>I graduated from Tufts University in 2019 with a Bachelors in Science in Biomedical Engineering.
-          Since then I have used my engineering skills to pursue my passions including my transition into web development.
-          I spent September 2021 through April 2022 taking the General Assembly Full-Stack Web Development to get acquianted
-          with the latest tools and frameworks. I spend my free time building web apps
-          to help solve problems inlcuding tracking investments and watering my plants!
-        </p>
+        <motion.div key="fullName" initial={initial} whileInView={final} viewport={viewport} transition={duration}>
+          <h1 className='text-white font-bold text-7xl sm:text-3xl'>Jeremee Louis Bornstein</h1>
+        </motion.div>
+        <motion.div key="companyName" initial={initial} whileInView={final} viewport={viewport} transition={duration}>
+          <h1 className='text-white text-5xl sm:text-2xl'>Sonos, Inc.</h1>
+        </motion.div>
+        <motion.div key="jobDescription" initial={initial} whileInView={final} viewport={viewport} transition={duration}>
+          <h1 className='text-white italic text-3xl sm:text-xl'>eCommerce QA Specialist</h1>
+        </motion.div>
+        <motion.div key="aboutMeSection" initial={initial} whileInView={final} viewport={viewport} transition={duration}>
+          <p className='flex justify-center self-center lg:text-3xl sm:px-2 sm:text-xl text-center lg:py-5 lg:px-5 sm:py-2 sm:px-2' id='about-me'>I graduated from Tufts University in 2019 with a Bachelors in Science in Biomedical Engineering.
+            Since then I have used my engineering skills to pursue my passions including my transition into web development.
+            I spent September 2021 through April 2022 taking the General Assembly Full-Stack Web Development to get acquianted
+            with the latest tools and frameworks. I spend my free time building web apps
+            to help solve problems inlcuding tracking investments and watering my plants!
+          </p>
+        </motion.div>
       </div>
     </div>
   )
