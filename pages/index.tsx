@@ -66,7 +66,7 @@ const Home = (props: PropsType) => {
           <h1 className='text-white font-bold text-7xl sm:text-3xl'>Jeremee Louis Bornstein</h1>
         </motion.div>
         <motion.div key="companyName" initial={initial} whileInView={final} viewport={viewport} transition={duration}>
-          <h1 className='text-white text-5xl sm:text-2xl underline'><a target="_blank" href='https://www.sonos.com/home'>Sonos, Inc.</a></h1>
+          <h1 className='text-white text-5xl sm:text-2xl underline'><a target="_blank" rel="noreferrer" href='https://www.sonos.com/home'>Sonos, Inc.</a></h1>
         </motion.div>
         <motion.div key="jobDescription" initial={initial} whileInView={final} viewport={viewport} transition={duration}>
           <h1 className='text-white italic text-3xl sm:text-xl'>eCommerce QA Specialist</h1>
