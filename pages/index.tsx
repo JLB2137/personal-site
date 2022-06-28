@@ -66,13 +66,13 @@ const Home = (props: PropsType) => {
           <h1 className='text-white font-bold text-7xl sm:text-3xl'>Jeremee Louis Bornstein</h1>
         </motion.div>
         <motion.div key="companyName" initial={initial} whileInView={final} viewport={viewport} transition={duration}>
-          <h1 className='text-white text-5xl sm:text-2xl'>Sonos, Inc.</h1>
+          <h1 className='text-white text-5xl sm:text-2xl underline'><a target="_blank" href='https://www.sonos.com/home'>Sonos, Inc.</a></h1>
         </motion.div>
         <motion.div key="jobDescription" initial={initial} whileInView={final} viewport={viewport} transition={duration}>
           <h1 className='text-white italic text-3xl sm:text-xl'>eCommerce QA Specialist</h1>
         </motion.div>
         <motion.div key="aboutMeSection" initial={initial} whileInView={final} viewport={viewport} transition={duration}>
-          <p className='flex justify-center self-center lg:text-3xl sm:px-2 sm:text-xl text-center lg:py-5 lg:px-5 sm:py-2 sm:px-2' id='about-me'>I graduated from Tufts University in 2019 with a Bachelors in Science in Biomedical Engineering.
+          <p className='flex justify-center self-center lg:text-2xl sm:px-2 sm:text-xl text-center lg:py-5 lg:px-5 sm:py-2 sm:px-2' id='about-me'>I graduated from Tufts University in 2019 with a Bachelors in Science in Biomedical Engineering.
             Since then I have used my engineering skills to pursue my passions including my transition into web development.
             I spent September 2021 through April 2022 taking the General Assembly Full-Stack Web Development to get acquianted
             with the latest tools and frameworks. I spend my free time building web apps
