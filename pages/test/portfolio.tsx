@@ -83,18 +83,20 @@ interface PlantsType {
 
 interface Plants {
   plantName: string,
+  image: string,
+  imageName: string
 
 }
 
 export async function getStaticProps({params}:GetStaticPropsContext, props: Props) {
   //grab all projects from Sanity
-  const plants: PlantsType[] = await sanity.fetch('*[_type == "plants"]')
+  const sanityPlants: PlantsType[] = await sanity.fetch('*[_type == "plants"]')
   //create an images array to grab all images and create links using sanity builder
   //const [projectPLPImage,setProjectPLPImage] = useState<StateProps>([])
   let plant: Plants[] = []
   let imageString: string
   let imageName: string
-  plants.map(selectedPlant => {
+  sanityPlants.map(selectedPlant => {
     //****this will need to be adjusted so that multiple images can be added for each project
     selectedPlant.images.map(image => {
       imageName = image.imageName
@@ -102,7 +104,7 @@ export async function getStaticProps({params}:GetStaticPropsContext, props: Prop
 
       //append to images array the projectName and the image url
       plant.push({
-        plantName: plant.name,
+        plantName: selectedPlant.name,
         image: imageString,
         imageName: imageName
       })
@@ -113,7 +115,7 @@ export async function getStaticProps({params}:GetStaticPropsContext, props: Prop
 
   return {
       props: {
-          portfolio,
+          plant,
           //can be removed later once useState works
           images,
           //projectPLPImage
@@ -130,26 +132,6 @@ const Portfolio = (props: Props) => {
   useEffect(()=> {
     console.log("hook results", projectPLPImage)
   },[])
-  
-  const ProjectImage = (imageIndex: number, projectPLPImage: Images[]) => {
-    if(props.screenWidth === 'mobile') {
-      return(
-        <motion.div className='px-5' initial="visible" animate={opacityChanger ? "visible" : "darker"} variants={variants} transition={{ type: "spring", duration: 0.8 }} onTap={onTap}>
-                  <div className='flex mx-auto'>
-                    <Image src={projectPLPImage[imageIndex].image} width={props.imageWidthPLP} height={props.imageHeightPLP} layout="intrinsic"/>
-                  </div>
-        </motion.div>
-      )
-    } else {
-      return(
-        <motion.div className='px-5' initial="visible" animate={opacityChanger ? "visible" : "darker"} variants={variants} transition={{ type: "spring", duration: 0.8 }} onHoverStart={onTap}>
-                  <div className='flex mx-auto'>
-                    <Image src={projectPLPImage[imageIndex].image} width={props.imageWidthPLP} height={props.imageHeightPLP} layout="intrinsic"/>
-                  </div>
-        </motion.div>
-      )
-    }
-  }
   
   
   const variants = {

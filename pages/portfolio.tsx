@@ -113,25 +113,6 @@ const Portfolio = (props: Props) => {
     console.log("hook results", projectPLPImage)
   },[])
   
-  const ProjectImage = (imageIndex: number, projectPLPImage: Images[]) => {
-    if(props.screenWidth === 'mobile') {
-      return(
-        <motion.div className='px-5' initial="visible" animate={opacityChanger ? "visible" : "darker"} variants={variants} transition={{ type: "spring", duration: 0.8 }} onTap={onTap}>
-                  <div className='flex mx-auto'>
-                    <Image src={projectPLPImage[imageIndex].image} width={props.imageWidthPLP} height={props.imageHeightPLP} layout="intrinsic"/>
-                  </div>
-        </motion.div>
-      )
-    } else {
-      return(
-        <motion.div className='px-5' initial="visible" animate={opacityChanger ? "visible" : "darker"} variants={variants} transition={{ type: "spring", duration: 0.8 }} onHoverStart={onTap}>
-                  <div className='flex mx-auto'>
-                    <Image src={projectPLPImage[imageIndex].image} width={props.imageWidthPLP} height={props.imageHeightPLP} layout="intrinsic"/>
-                  </div>
-        </motion.div>
-      )
-    }
-  }
   
   
   const variants = {
