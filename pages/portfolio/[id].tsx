@@ -205,6 +205,7 @@ const Project = (props: Props) => {
                 })}
             </motion.div>
         </div>
+        
     )
 
 }
