@@ -85,7 +85,8 @@ interface PlantsType {
 interface Plants {
   plantName: string,
   image: string,
-  imageName: string
+  imageName: string,
+  plantURL: string
 
 }
 
@@ -96,18 +97,26 @@ export async function getStaticProps({params}:GetStaticPropsContext, props: Prop
   let plants: Plants[] = []
   let imageString: string
   let imageName: string
+  let plantURL: string
   sanityPlants.map(selectedPlant => {
     //****this will need to be adjusted so that multiple images can be added for each project
+    console.log("slugResult",selectedPlant.slug.current)
+    //CURRENT ISSUE HERE IS THAT WE ARE CREATING A NEW PLANT FOR EVERY IMAGE RATHER THAN PLANT
+    
     selectedPlant.images.map(image => {
-      imageName = image.imageName
-      imageString = imageUrlBuilder(sanity).image(image).url()
-
-      //append to images array the projectName and the image url
-      plants.push({
-        plantName: selectedPlant.name,
-        image: imageString,
-        imageName: imageName
-      })
+      if (image.imageName === 'desktop_PLP') {
+        imageName = image.imageName
+        console.log("imageName",imageName)
+        imageString = imageUrlBuilder(sanity).image(image).url()
+        plantURL = selectedPlant.slug.current
+        //append to images array the projectName and the image url
+        plants.push({
+          plantName: selectedPlant.name,
+          image: imageString,
+          imageName: imageName,
+          plantURL
+        })
+      }
     })
   })
 
@@ -125,6 +134,7 @@ const Portfolio = (props: Props) => {
 
   const [opacityChanger, setOpacityChanger] = useState(true)
   const [plant,setPlant] = useState(props.plants)
+  console.log("plants",props.plants)
 
 
   useEffect(()=> {
@@ -167,7 +177,7 @@ const Portfolio = (props: Props) => {
           }
           
           return(
-            <div key={project.projectName} className='justify-center mx-auto text-white lg:pt-10 sm:grid sm:grid-cols-2 sm:mt-5 sm:h-max'>
+            <div key={plant.plantName} className='justify-center mx-auto text-white lg:pt-10 sm:grid sm:grid-cols-2 sm:mt-5 sm:h-max'>
               <div className='flex relative lg:flex-wrap sm:col-span-2 sm:h-full'>
                 {props.screenWidth === 'mobile' ?
                   <motion.div className='px-5' initial="visible" animate={opacityChanger ? "visible" : "darker"} variants={variants} transition={{ type: "spring", duration: 0.8 }} onTap={onTap}>
@@ -190,24 +200,14 @@ const Portfolio = (props: Props) => {
                     <div className='flex col-span-2 mx-auto items-center lg:text-3xl lg:my-5 sm:mb-3'>
 
 
-Need to adjust this so it says the plant name but anchor tag is removed because we are not redirecting to a project site.
 
 
-                      <a className='underline mx-auto sm:text-2xl sm:mx-1' href={project.projectURL} target="_blank" rel="noreferrer">{project.projectName}</a>
-                    </div>
-                    <div className='col-span-2 flex flex-wrap justify-center mx-auto sm:my-5 sm:text-lg'>
-                        {
-                          project.technology.map(technology => {
-                              return(
-                                <p key={technology.children[0].text} className='text-white self-center sm:px-2 sm:mx-5'>{technology.children[0].text}</p>
-                              )
-                          })
-                        }
+                      <a className='underline mx-auto sm:text-2xl sm:mx-1' href={plant.plantURL} target="_blank" rel="noreferrer">{plant.plantName}</a>
                     </div>
                     <Link href={{
-                        pathname: `/portfolio/[id]`,
-                        query: {id: project.slug.current}
-                        }} key={project.slug.current}>
+                        pathname: `/hobbies/plants/[id]`,
+                        query: {id: plant.plantURL}
+                        }} key={plant.plantURL}>
                         <div className='flex col-span-2'>
                           <button className="italic text-white border-white mx-auto self-end hover:text-neutral-400 hover:border-neutral-400 sm:my-5 sm:w-40 sm:border-2 sm:rounded-full sm:text-xl">Learn More</button>
                         </div>
@@ -219,26 +219,14 @@ Need to adjust this so it says the plant name but anchor tag is removed because 
 
                   <motion.div className='absolute top-0 left-0 z-10 flex-auto lg:w-full lg:h-full sm:h-full' initial="hidden" animate={opacityChanger ? "hidden" : "visible"} variants={variants} transition={{ type: "spring", duration: 1 }} onHoverEnd={onTap}>
                     <div className='flex col-span-2 mx-auto items-center lg:text-3xl sm:mb-3'>
-                      <a className='underline mx-auto sm:text-2xl sm:mx-1' href={project.projectURL} target="_blank" rel="noreferrer">{project.projectName}</a>
-                      <a className='sm:mx-1 flex items-center' href={project.gitURL} target="_blank" rel="noreferrer">
-                        <Image className="invert" src="/github.png" width={25} height={25} layout="fixed" />
-                      </a>
-                    </div>
-                    <div className='col-span-2 flex flex-wrap justify-center mx-auto sm:my-5 sm:text-lg'>
-                        {
-                          project.technology.map(technology => {
-                              return(
-                                <p key={technology.children[0].text} className='text-white self-center lg:text-2xl lg:px-5 sm:mx-5'>{technology.children[0].text}</p>
-                              )
-                          })
-                        }
+                      <a className='underline mx-auto sm:text-2xl sm:mx-1' href={plant.plantURL} target="_blank" rel="noreferrer">{plant.plantName}</a>
                     </div>
                     <Link href={{
-                        pathname: `/portfolio/[id]`,
-                        query: {id: project.slug.current}
-                        }} key={project.slug.current}>
+                        pathname: `/hobbies/plants/[id]`,
+                        query: {id: plant.plantURL}
+                        }} key={plant.plantURL}>
                         <div className='flex col-span-2'>
-                          <button className="italic text-white border-white mx-auto self-end border-2 rounded-full text-3xl py-2 px-8 hover:text-neutral-400 hover:border-neutral-400 sm:my-5 sm:w-40 sm:border-2 sm:rounded-full sm:text-xl">Learn More</button>
+                          <button className="italic text-white border-white mx-auto self-end hover:text-neutral-400 hover:border-neutral-400 sm:my-5 sm:w-40 sm:border-2 sm:rounded-full sm:text-xl">Learn More</button>
                         </div>
                     </Link>
                   </motion.div>
