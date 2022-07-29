@@ -15,6 +15,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [imageHeightPDP, setImageHeightPDP] = useState(0)
   const [githubWidth, setGithubWidth] = useState(0)
   const [githubHeight, setGithubHeight] = useState(0)
+  const [personalImageHeight,setPersonalImageHeight] = useState(0)
+  const [personalImageWidth,setPersonalImageWidth] = useState(0)
 
   const grabScreenWidth = () => {
     try {
@@ -22,6 +24,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         setScreenWidth('mobile')
         setImageHeightPLP(867)
         setImageWidthPLP(587)
+        setPersonalImageHeight(539)
+        setPersonalImageWidth(625)
         setImageHeightPDP(400)
         setImageWidthPDP(625)
         setGithubWidth(25)
@@ -30,6 +34,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         setScreenWidth('desktop')
         setImageHeightPLP(400)
         setImageWidthPLP(625)
+        setPersonalImageHeight(810)
+        setPersonalImageWidth(938)
         setImageHeightPDP(600)
         setImageWidthPDP(938)
         setGithubWidth(75)
@@ -51,7 +57,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       navOpen={navOpen}
       setNavOpen={setNavOpen}
       />
-      <Component {...pageProps} screenWidth={screenWidth} imageHeightPLP={imageHeightPLP} imageWidthPLP={imageWidthPLP} imageHeightPDP={imageHeightPDP} imageWidthPDP={imageWidthPDP} githubWidth={githubWidth} githubHeight={githubHeight} />
+      <Component {...pageProps} personalImageWidth={personalImageWidth} personalImageHeight={personalImageHeight} screenWidth={screenWidth} imageHeightPLP={imageHeightPLP} imageWidthPLP={imageWidthPLP} imageHeightPDP={imageHeightPDP} imageWidthPDP={imageWidthPDP} githubWidth={githubWidth} githubHeight={githubHeight} />
     </div>
   )
 }

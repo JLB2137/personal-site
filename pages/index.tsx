@@ -5,10 +5,15 @@ import styles from '../styles/Home.module.css'
 import sanity from '../client';
 import imageUrlBuilder from '@sanity/image-url';
 import { motion } from "framer-motion";
+import {useState,useEffect} from 'react'
 
 interface PropsType {
   screenWidth: string,
-  backgroundImages: string[],
+  backgroundImages: BackgroundImages[],
+  personalPhoto: string[],
+  personalImageWidth: number,
+  personalImageHeight: number,
+  profilePhoto: string
 }
 
 interface ImageType {
@@ -18,25 +23,44 @@ interface ImageType {
     _ref: string,
     _type: string
   },
-  imageDate: string
+  imageDate: string,
+  imageName: string
 }
 
 interface ImagesType {
-  images: ImageType[]
+  images: ImageType[],
+  page: string,
+  imageName: string
 }
+
+
 
 export async function getStaticProps() {
   //fetch plants from Sanity DB
-  const backgroundImage: ImagesType[] = await sanity.fetch('*[_type == "backgroundImages" && page == "Home Page"]{images}')
-  let images: ImagesType = backgroundImage[0]
+  const backgroundImages2: ImagesType[] = await sanity.fetch('*[_type == "backgroundImages"]')
   let backgroundImages: string[] = []
-  images.images.map(image => {
-      backgroundImages.push(imageUrlBuilder(sanity).image(image).url())
+  let returnedImage: string
+  let profilePhoto: string = ""
+  let imageName: string
+  backgroundImages2.map((image) => {
+    console.log(image)
+    if (image.page === 'Home Page') {
+      image.images.map((returnedImage) => {
+        if (returnedImage.imageName === "homeImage" || returnedImage.imageName === "homeImage_mobile") {
+          backgroundImages.push(imageUrlBuilder(sanity).image(returnedImage).url())
+        } else {
+          profilePhoto = imageUrlBuilder(sanity).image(returnedImage).url()
+        }
+          
+      })
+    }
   })
+  
   return {
       //static props return server side as a prop
       props: {
-          backgroundImages
+          backgroundImages,
+          profilePhoto
       }
   }
 }
@@ -55,6 +79,23 @@ const duration = {
 }
 
 const Home = (props: PropsType) => {
+
+  const [backgroundImage, setBackgroundImage] = useState('')
+  const [backgroundImageMobile, setBackgroundImageMobile] = useState('')
+  const [profileImage, setProfileImage] = useState('')
+  
+  useEffect(()=>{
+    props.backgroundImages.map((image) => {
+      if(image.imageName == "homeImage") {
+        setBackgroundImage(image.image)
+      } else if (image.imageName == "homeImage_mobile"){
+        setBackgroundImageMobile(image.image)
+      } else if (image.imageName == "Personal Image") {
+        setProfileImage(image.image)
+      }
+    })
+  },[])
+
   return (
     <div className='flex flex-col absolute top-0'>
       <img className="block brightness-75 h-screen w-screen" src={props.screenWidth && props.screenWidth === 'mobile' ? props.backgroundImages[1] : props.backgroundImages[0]}/>
@@ -63,6 +104,7 @@ const Home = (props: PropsType) => {
       </div>
       <div className='flex flex-col bg-black text-white z-10 text-center content-center'>
         <motion.div key="fullName" initial={initial} whileInView={final} viewport={viewport} transition={duration}>
+        <Image className="border-white sm:border-8 sm:h-96" width={props.personalImageWidth} height={props.personalImageHeight} src={props.profilePhoto} layout='intrinsic' />
           <h1 className='text-white font-bold text-7xl sm:text-3xl'>Jeremee Louis Bornstein</h1>
         </motion.div>
         <motion.div key="companyName" initial={initial} whileInView={final} viewport={viewport} transition={duration}>
