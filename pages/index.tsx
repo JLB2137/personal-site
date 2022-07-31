@@ -7,9 +7,11 @@ import imageUrlBuilder from '@sanity/image-url';
 import { motion } from "framer-motion";
 import {useState,useEffect} from 'react'
 
+
+
 interface PropsType {
   screenWidth: string,
-  backgroundImages: BackgroundImages[],
+  backgroundImages: string[],
   personalPhoto: string[],
   personalImageWidth: number,
   personalImageHeight: number,
@@ -43,7 +45,6 @@ export async function getStaticProps() {
   let profilePhoto: string = ""
   let imageName: string
   backgroundImages2.map((image) => {
-    console.log(image)
     if (image.page === 'Home Page') {
       image.images.map((returnedImage) => {
         if (returnedImage.imageName === "homeImage" || returnedImage.imageName === "homeImage_mobile") {
@@ -84,17 +85,6 @@ const Home = (props: PropsType) => {
   const [backgroundImageMobile, setBackgroundImageMobile] = useState('')
   const [profileImage, setProfileImage] = useState('')
   
-  useEffect(()=>{
-    props.backgroundImages.map((image) => {
-      if(image.imageName == "homeImage") {
-        setBackgroundImage(image.image)
-      } else if (image.imageName == "homeImage_mobile"){
-        setBackgroundImageMobile(image.image)
-      } else if (image.imageName == "Personal Image") {
-        setProfileImage(image.image)
-      }
-    })
-  },[])
 
   return (
     <div className='flex flex-col absolute top-0'>

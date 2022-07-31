@@ -77,7 +77,7 @@ interface PlantsType {
   _updatedAt: string,
   acquisitionDate: string,
   binomial: string,
-  images: ImagesType[],
+  images: Image[],
   name: string,
   slug: { _type: string, current: string },
 }
@@ -100,13 +100,11 @@ export async function getStaticProps({params}:GetStaticPropsContext, props: Prop
   let plantURL: string
   sanityPlants.map(selectedPlant => {
     //****this will need to be adjusted so that multiple images can be added for each project
-    console.log("slugResult",selectedPlant.slug.current)
     //CURRENT ISSUE HERE IS THAT WE ARE CREATING A NEW PLANT FOR EVERY IMAGE RATHER THAN PLANT
     
     selectedPlant.images.map(image => {
       if (image.imageName === 'desktop_PLP') {
         imageName = image.imageName
-        console.log("imageName",imageName)
         imageString = imageUrlBuilder(sanity).image(image).url()
         plantURL = selectedPlant.slug.current
         //append to images array the projectName and the image url
@@ -130,16 +128,11 @@ export async function getStaticProps({params}:GetStaticPropsContext, props: Prop
   }
 }
 
-const Portfolio = (props: Props) => {
+const Plants = (props: Props) => {
 
   const [opacityChanger, setOpacityChanger] = useState(true)
   const [plant,setPlant] = useState(props.plants)
-  console.log("plants",props.plants)
 
-
-  useEffect(()=> {
-    console.log("hook results", plant)
-  },[])
   
   
   const variants = {
@@ -152,7 +145,6 @@ const Portfolio = (props: Props) => {
   const onTap = () => {
     if (opacityChanger === true) {
       setOpacityChanger(false)
-      console.log("false")
     } else {
       setOpacityChanger(true)
     }
@@ -238,4 +230,4 @@ const Portfolio = (props: Props) => {
   )
 }
 
-export default Portfolio
+export default Plants
