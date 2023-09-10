@@ -59,3 +59,24 @@
     left: -90%
   }
 }
+
+@media(min-height: 1000px) {
+  #page{
+    height: 100vh
+  }
+  
+}
+
+@media(min-width: 1900px) {
+  #page{
+    height: 100vh
+  }
+  
+}
+
+@media(min-height: 1200px) {
+  #port{
+    height: 100vh
+  }
+  
+}

@@ -36,6 +36,8 @@ module.exports = {
 
       '2xl': {'min': '1536px'},
       // => @media (min-width: 1536px) { ... }
+
+      'tall': {'raw': '(min-height: 800px'},
     },
     backgroundImage: {
       'hero': "url('/home_image.jpg')",

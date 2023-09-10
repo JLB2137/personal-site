@@ -133,7 +133,7 @@ const Portfolio = (props: Props) => {
 
 
   return (
-    <div className='pt-10 bg-black sm:pb-5 lg:flex lg:flex-wrap h-screen'>
+    <div id ='page' className='pt-10 bg-black sm:pb-5 lg:flex lg:flex-wrap tall:h-screen'>
       <div className='justify-left text-white lg:w-full lg:ml-32 sm:ml-5'>
         <h1 className="font-bold lg:text-7xl sm:text-3xl h-min">Portfolio</h1>
       </div>
