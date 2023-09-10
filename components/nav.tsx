@@ -83,11 +83,7 @@ const Nav = (props: Props) => {
                                 <a className='hover:text-white text-base' onClick={()=> setDropdown()}>PORTFOLIO</a>
                             </Link>
                         </div>
-                        <div className='row-span-1 justify-center mb-2.5 mx-auto text-neutral-500 font-bold'>
-                            <Link href="/hobbies/plants">
-                                <a className='hover:text-white text-base' onClick={()=> setDropdown()}>PLANTS</a>
-                            </Link>
-                        </div>
+
                         <div className='grid grid-cols-2 invert w-20 justify-center mx-auto gap-x-4'>
                             <Link href='https://www.linkedin.com/in/jeremee-bornstein/' passHref>
                                 <a target="_blank"><img src='/linkedin.png' /></a>
@@ -108,3 +104,10 @@ const Nav = (props: Props) => {
   }
 
 export default Nav
+
+
+//<div className='row-span-1 justify-center mb-2.5 mx-auto text-neutral-500 font-bold'>
+    //<Link href="/hobbies/plants">
+        //<a className='hover:text-white text-base' onClick={()=> setDropdown()}>PLANTS</a>
+    //</Link>
+//</div>
