@@ -194,12 +194,12 @@ const Project = (props: Props) => {
                     )
                 })}
             </motion.div>
-            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }} className="flex flex-row flex-wrap justify-center w-screen mx-auto lg:mt-10 lg:px-32 sm:mt-4">
+            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }} className="flex flex-row flex-wrap justify-center w-screen mx-auto lg:mt-10 lg:px-32 sm:mt-4 sm:pb-5">
                 <p className="font-oswald italic text-white underline lg:text-5xl sm:mx-2 sm:text-2xl text-center w-screen">Technology</p>
                 {props.project.technology?.map(technology => {
                     return(
                         <motion.div key={technology.children[0].text} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }}>
-                            <p className="font-oswald text-white text-center lg:text-2xl lg:my-5 lg:mx-5 sm:my-2 sm:mx-2 sm:text-xl">{technology.children[0].text}</p>
+                            <p className="font-oswald text-white text-center lg:text-2xl lg:my-5 lg:mx-5 sm:my-2 sm:mx-4 sm:text-xl">{technology.children[0].text}</p>
                         </motion.div>
                     )
                 })}
