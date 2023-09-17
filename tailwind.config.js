@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     fontFamily: {
       "header": ["Helvetica"],
-      "name": ["Arial Black,Arial Bold,Gadget,sans-serif; "]
+      "name": ["Arial Black,Arial Bold,Gadget,sans-serif "],
+      "oswald": ['Oswald, sans-serif']
     },
     fontSize: {
       'xxs': '.5rem',
@@ -41,7 +42,6 @@ module.exports = {
     },
     backgroundImage: {
       'hero': "url('/home_image.jpg')",
-      'plant': "url('/plants/tomatoe.png')",
     },
     extend: {},
   },

@@ -135,7 +135,7 @@ const Portfolio = (props: Props) => {
   return (
     <div id ='page' className='pt-10 bg-black sm:pb-5 lg:flex lg:flex-wrap tall:h-screen'>
       <div className='justify-left text-white lg:w-full lg:ml-32 sm:ml-5'>
-        <h1 className="font-bold lg:text-7xl sm:text-3xl h-min">Portfolio</h1>
+        <h1 className="font-oswald font-bold lg:text-7xl sm:text-3xl lg:h-2">Portfolio</h1>
       </div>
       { 
         props.portfolio.map(project => {
@@ -170,18 +170,18 @@ const Portfolio = (props: Props) => {
 
                 }
                 {props.screenWidth === 'mobile' ?
-                  <motion.div className='absolute top-0 left-0 z-10 flex-auto sm:h-full' initial="hidden" animate={opacityChanger ? "hidden" : "visible"} variants={variants} transition={{ type: "spring", duration: 1 }} onTap={onTap}>
+                  <motion.div className='absolute top-0 left-0 right-0 z-10 flex-auto justify-center sm:h-full' initial="hidden" animate={opacityChanger ? "hidden" : "visible"} variants={variants} transition={{ type: "spring", duration: 1 }} onTap={onTap}>
                     <div className='flex col-span-2 mx-auto items-center lg:text-3xl lg:my-5 sm:mb-3'>
-                      <a className='underline mx-auto sm:text-2xl sm:mx-1' href={project.projectURL} target="_blank" rel="noreferrer">{project.projectName}</a>
-                      <a className='sm:mx-1 flex items-center' href={project.gitURL} target="_blank" rel="noreferrer">
+                      <a className='font-oswald underline mx-auto sm:text-2xl sm:mx-1' href={project.projectURL} target="_blank" rel="noreferrer">{project.projectName}</a>
+                      <a className='font-oswald sm:mx-1 flex items-center' href={project.gitURL} target="_blank" rel="noreferrer">
                         <Image className="invert" src="/github.png" width={25} height={25} layout="fixed" />
                       </a>
                     </div>
-                    <div className='col-span-2 flex flex-wrap justify-center mx-auto sm:my-5 sm:text-lg'>
+                    <div className='col-span-2 flex flex-wrap justify-center mx-auto sm:my-5 sm:px-5 sm:text-lg'>
                         {
                           project.technology.map(technology => {
                               return(
-                                <p key={technology.children[0].text} className='text-white self-center sm:px-2 sm:mx-5'>{technology.children[0].text}</p>
+                                <p key={technology.children[0].text} className='font-oswald text-white self-center sm:px-2 sm:mx-0'>{technology.children[0].text}</p>
                               )
                           })
                         }
@@ -191,7 +191,7 @@ const Portfolio = (props: Props) => {
                         query: {id: project.slug.current}
                         }} key={project.slug.current}>
                         <div className='flex col-span-2'>
-                          <button className="italic text-white border-white mx-auto self-end hover:text-neutral-400 hover:border-neutral-400 sm:my-5 sm:w-40 sm:border-2 sm:rounded-full sm:text-xl">Learn More</button>
+                          <button className="font-oswald text-white border-white mx-auto self-end hover:text-neutral-400 hover:border-neutral-400 sm:my-5 sm:w-40 sm:border-2 sm:rounded-full sm:text-xl">Learn More</button>
                         </div>
                     </Link>
                   </motion.div>
@@ -201,12 +201,12 @@ const Portfolio = (props: Props) => {
 
                   <motion.div className='absolute top-0 left-0 z-10 flex-auto lg:w-full lg:h-full sm:h-full' initial="hidden" animate={opacityChanger ? "hidden" : "visible"} variants={variants} transition={{ type: "spring", duration: 1 }} onHoverEnd={onTap}>
                     <div className='flex col-span-2 mx-auto items-center lg:text-3xl sm:mb-3'>
-                      <a className='underline mx-auto sm:text-2xl sm:mx-1' href={project.projectURL} target="_blank" rel="noreferrer">{project.projectName}</a>
-                      <a className='sm:mx-1 flex items-center' href={project.gitURL} target="_blank" rel="noreferrer">
+                      <a className='font-oswald underline mx-auto sm:text-2xl sm:mx-1' href={project.projectURL} target="_blank" rel="noreferrer">{project.projectName}</a>
+                      <a className='font-oswald sm:mx-1 flex items-center' href={project.gitURL} target="_blank" rel="noreferrer">
                         <Image className="invert" src="/github.png" width={25} height={25} layout="fixed" />
                       </a>
                     </div>
-                    <div className='col-span-2 flex flex-wrap justify-center mx-auto sm:my-5 sm:text-lg'>
+                    <div className='font-oswald col-span-2 flex flex-wrap justify-center mx-auto sm:my-5 sm:text-lg'>
                         {
                           project.technology.map(technology => {
                               return(
@@ -220,7 +220,7 @@ const Portfolio = (props: Props) => {
                         query: {id: project.slug.current}
                         }} key={project.slug.current}>
                         <div className='flex col-span-2'>
-                          <button className="italic text-white border-white mx-auto self-end border-2 rounded-full text-3xl py-2 px-8 hover:text-neutral-400 hover:border-neutral-400 sm:my-5 sm:w-40 sm:border-2 sm:rounded-full sm:text-xl">Learn More</button>
+                          <button className="font-oswald text-white border-white mx-auto self-end border-2 rounded-full text-3xl py-2 px-8 hover:text-neutral-400 hover:border-neutral-400 my-5 border-2 rounded-full text-xl">Learn More</button>
                         </div>
                     </Link>
                   </motion.div>

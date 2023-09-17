@@ -65,9 +65,9 @@ const Nav = (props: Props) => {
                 <div className="grid justify-end align-middle text-white sm:col-span-5 sm:mr-2" >
                     <div className='grid w-max align-middle'>
                         <Link href="/">
-                            <a id="name" className='text-6xl font-name sm:text-5xl sm:w-fit sm:h-fit sm:-mb-4 sm:mx-auto sm:font-extrabold'>JEREMEE</a>
+                            <a id="name" className='font-oswald text-6xl font-name sm:text-5xl sm:w-fit sm:h-fit sm:-mb-4 sm:mx-auto sm:font-extrabold'>JEREMEE</a>
                         </Link>
-                        <p className="text-sm mx-auto sm:text-xs">E-Commerce Specialist, Engineer, Plant Dad</p>
+                        <p className="font-oswald text-lg mx-auto sm:text-xs">E-Commerce Specialist, Engineer, Plant Dad</p>
                     </div>
                 </div>
                 
@@ -78,7 +78,7 @@ const Nav = (props: Props) => {
                         <div className='row-span-1 justify-start mb-5 text-neutral-500 font-bold'>    
                             <button className='hover:text-white text-4xl' onClick={()=> setDropdown()}>X</button>
                         </div>
-                        <div className='row-span-1 justify-center mb-2.5 mx-auto text-neutral-500 font-bold'>
+                        <div className='font-oswald row-span-1 justify-center mb-2.5 mx-auto text-neutral-500 font-bold'>
                             <Link href="/portfolio">
                                 <a className='hover:text-white text-base' onClick={()=> setDropdown()}>PORTFOLIO</a>
                             </Link>
@@ -93,7 +93,7 @@ const Nav = (props: Props) => {
                             </Link>
                         </div>
                         <div className='row-span-1 justify-center mx-auto mt-auto mb-0 text-neutral-500 align-bottom align-text-bottom '>
-                            <p className='text-white italic text-sm'>Jeremee Louis Bornstein</p>
+                            <p className='font-oswald text-white italic text-sm'>Jeremee Louis Bornstein</p>
                         </div>
                     </div>
                 </motion.div>

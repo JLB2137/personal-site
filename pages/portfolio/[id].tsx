@@ -148,8 +148,8 @@ const Project = (props: Props) => {
     return(
         <div id='port' className="pt-10 bg-black lg:pb-10">
             <div className='flex col-span-2 justify-left items-center ml-32 sm:ml-2 sm:mb-3'>
-                <a className='text-white font-bold text-7xl sm:text-3xl' href={props.project.projectURL} target="_blank" rel="noreferrer">{props.project.projectName}</a>
-                <a className='mx-3 flex' href={props.project.gitURL} target="_blank" rel="noreferrer">
+                <a className='font-oswald text-white font-bold text-7xl sm:text-3xl' href={props.project.projectURL} target="_blank" rel="noreferrer">{props.project.projectName}</a>
+                <a className='font-oswald mx-3 flex' href={props.project.gitURL} target="_blank" rel="noreferrer">
                   <Image className="invert" src="/github.png" width={props.githubWidth} height={props.githubHeight} layout="fixed" />
                 </a>
             </div>
@@ -162,7 +162,7 @@ const Project = (props: Props) => {
                 {props.images?.map((imageString,index) => {
                     if (imageString === image && props.screenWidth === 'mobile') {
                         return(
-                            <p className="text-white sm:mx-2 sm:text-xs">&#9679;</p>
+                            <p className="text-white sm:mx-2 sm:text-xs">&#11044;</p>
                         )
                     } else if (imageString === image && props.screenWidth === 'desktop') {
                         return(
@@ -179,27 +179,27 @@ const Project = (props: Props) => {
                 {props.project.shortDescription?.map(description => {
                     return(
                         <motion.div key={description.children[0].text} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }}>
-                            <p className="text-white lg:text-3xl sm:mx-2 sm:text-xl text-center">{description.children[0].text}</p>
+                            <p className="font-oswald text-white lg:text-3xl sm:mx-2 sm:text-xl text-center">{description.children[0].text}</p>
                         </motion.div>
                     )
                 })}
             </motion.div>
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }} className="flex flex-row flex-wrap w-screen lg:mt-10 lg:px-32 sm:mt-4">
-                <p className="italic text-white underline lg:text-5xl sm:mx-2 sm:text-2xl text-center w-screen">Features</p>
+                <p className="font-oswald italic text-white underline lg:text-5xl sm:mx-2 sm:text-2xl text-center w-screen">Features</p>
                 {props.project.features?.map(feature => {
                     return(
                         <motion.div key={feature.children[0].text} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }}>
-                            <p className="text-white text-left lg:text-2xl lg:my-5 sm:my-2 sm:mx-2 sm:text-xl">{feature.children[0].text}</p>
+                            <p className="font-oswald text-white text-left lg:text-2xl lg:my-5 sm:my-2 sm:mx-2 sm:px-2 sm:text-xl">{feature.children[0].text}</p>
                         </motion.div>
                     )
                 })}
             </motion.div>
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }} className="flex flex-row flex-wrap justify-center w-screen mx-auto lg:mt-10 lg:px-32 sm:mt-4">
-                <p className="italic text-white underline lg:text-5xl sm:mx-2 sm:text-2xl text-center w-screen">Technology</p>
+                <p className="font-oswald italic text-white underline lg:text-5xl sm:mx-2 sm:text-2xl text-center w-screen">Technology</p>
                 {props.project.technology?.map(technology => {
                     return(
                         <motion.div key={technology.children[0].text} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }}>
-                            <p className="text-white text-center lg:text-2xl lg:my-5 lg:mx-5 sm:my-2 sm:mx-2 sm:text-xl">{technology.children[0].text}</p>
+                            <p className="font-oswald text-white text-center lg:text-2xl lg:my-5 lg:mx-5 sm:my-2 sm:mx-2 sm:text-xl">{technology.children[0].text}</p>
                         </motion.div>
                     )
                 })}

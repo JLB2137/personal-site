@@ -1,7 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;600&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 .nameHeader {
   font-weight: lighter;
