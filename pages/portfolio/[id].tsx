@@ -119,24 +119,34 @@ const Project = (props: Props) => {
     const onDrag = (info: PanInfo) => {
         //if the image is dragged to the left and is last of stack
         if (initialPosition > info.point.x && image === imageArray[props.images.length-1]) {
+            setImage(imageArray[0])
             setImageIterator(0)
         //if image is dragged left but isn't last of stack
         } else if (initialPosition > info.point.x && image !== imageArray[props.images.length-1]) {
+            setImage(imageArray[imageIterator+1])
             //grab the last index value of the array
             setImageIterator(imageIterator+1)
         //if image is dragged right and is first in stack
         } else if (initialPosition < info.point.x && image === imageArray[0]){
+            setImage(imageArray[props.images.length-1])
             setImageIterator(props.images.length-1)
         //if image is dragged right and isn't end of stack
         } else if (initialPosition < info.point.x && image !== imageArray[0]) {
+            setImage(imageArray[imageIterator-1])
             setImageIterator(imageIterator-1)
         }
     }
 
+
+    const onClick = (index: number) => {
+        setImage(imageArray[index])
+        setImageIterator(index)
+    }
+
     //Once the iterator changes, change the image
-    useEffect(()=> {
-        setImage(imageArray[imageIterator])
-    },[imageIterator])
+    //useEffect(()=> {
+    //    setImage(imageArray[imageIterator])
+    //},[imageIterator])
     
 
     //once the array changes, we set the image to the first image in the stack
@@ -173,7 +183,7 @@ const Project = (props: Props) => {
                             )
                         } else {
                             return(
-                                <button onClick={()=> setImageIterator(index)} className="text-white lg:mx-4 sm:mx-2 sm:text-xs">&#9675;</button>
+                                <button onClick={()=> onClick(index)} className="text-white lg:mx-4 sm:mx-2 sm:text-xs">&#9675;</button>
                             )
                         }
                     })}
