@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import {useEffect, useState} from 'react'
 import Nav from '../components/nav'
+import { motion } from "framer-motion";
 
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -52,12 +53,14 @@ function MyApp({ Component, pageProps }: AppProps) {
   },[])
 
   return (
-    <div className='bg-black'>
+    <div>
+      <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }}>
       <Nav 
       navOpen={navOpen}
       setNavOpen={setNavOpen}
       />
       <Component {...pageProps} personalImageWidth={personalImageWidth} personalImageHeight={personalImageHeight} screenWidth={screenWidth} imageHeightPLP={imageHeightPLP} imageWidthPLP={imageWidthPLP} imageHeightPDP={imageHeightPDP} imageWidthPDP={imageWidthPDP} githubWidth={githubWidth} githubHeight={githubHeight} />
+      </motion.div>
     </div>
   )
 }

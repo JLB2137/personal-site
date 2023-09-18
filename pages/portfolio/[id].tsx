@@ -153,56 +153,58 @@ const Project = (props: Props) => {
                   <Image className="invert" src="/github.png" quality={25} width={props.githubWidth} height={props.githubHeight} layout="fixed" />
                 </a>
             </div>
-            <div className="grid justify-center lg:pt-10 sm:pt-5 sm:mx-2 overflow-hidden">
-                <motion.div className="lg:px-96" drag="x" dragConstraints={{ left: 0, right: 0 }} onDragStart={(event, info) => positionLocator(info)} onDragEnd={(event, info) => onDrag(info)}>
-                    <Image className="border-white sm:border-8 sm:h-96" quality={25} priority={true} width={props.imageWidthPDP} height={props.imageHeightPDP} src={image ? image : "/github.png"} layout='intrinsic' />
-                </motion.div> 
-            </div>
-            <div className="flex flex-row justify-center w-max mx-auto sm:mt-4">
-                {props.images?.map((imageString,index) => {
-                    if (imageString === image && props.screenWidth === 'mobile') {
+            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }} className="bg-black">
+                <div className="grid justify-center lg:pt-10 sm:pt-5 sm:mx-2 overflow-hidden">
+                    <motion.div className="lg:px-96" drag="x" dragConstraints={{ left: 0, right: 0 }} onDragStart={(event, info) => positionLocator(info)} onDragEnd={(event, info) => onDrag(info)}>
+                        <Image className="border-white sm:border-8 sm:h-96" quality={25} priority={true} width={props.imageWidthPDP} height={props.imageHeightPDP} src={image ? image : "/github.png"} layout='intrinsic' />
+                    </motion.div> 
+                </div>
+                <div className="flex flex-row justify-center w-max mx-auto sm:mt-4">
+                    {props.images?.map((imageString,index) => {
+                        if (imageString === image && props.screenWidth === 'mobile') {
+                            return(
+                                <p className="text-white sm:mx-2 sm:text-xs">&#11044;</p>
+                            )
+                        } else if (imageString === image && props.screenWidth === 'desktop') {
+                            return(
+                                <p className="text-white lg:mx-4 sm:text-xs">&#11044;</p>
+                            )
+                        } else {
+                            return(
+                                <button onClick={()=> setImageIterator(index)} className="text-white lg:mx-4 sm:mx-2 sm:text-xs">&#9675;</button>
+                            )
+                        }
+                    })}
+                </div>
+                <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }} className="flex flex-row justify-center mx-auto lg:mt-10 lg:px-32 sm:mt-4">
+                    {props.project.shortDescription?.map(description => {
                         return(
-                            <p className="text-white sm:mx-2 sm:text-xs">&#11044;</p>
+                            <motion.div key={description.children[0].text} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }}>
+                                <p className="font-oswald text-white lg:text-3xl sm:mx-2 sm:text-xl text-center">{description.children[0].text}</p>
+                            </motion.div>
                         )
-                    } else if (imageString === image && props.screenWidth === 'desktop') {
+                    })}
+                </motion.div>
+                <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }} className="flex flex-row flex-wrap w-screen lg:mt-10 lg:px-32 sm:mt-4">
+                    <p className="font-oswald italic text-white underline lg:text-5xl sm:mx-2 sm:text-2xl text-center w-screen">Features</p>
+                    {props.project.features?.map(feature => {
                         return(
-                            <p className="text-white lg:mx-4 sm:text-xs">&#11044;</p>
+                            <motion.div key={feature.children[0].text} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }}>
+                                <p className="font-oswald text-white text-left lg:text-2xl lg:my-5 sm:my-2 sm:mx-2 sm:px-2 sm:text-xl">{feature.children[0].text}</p>
+                            </motion.div>
                         )
-                    } else {
+                    })}
+                </motion.div>
+                <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }} className="flex flex-row flex-wrap justify-center w-screen mx-auto lg:mt-10 lg:px-32 sm:mt-4 sm:pb-5">
+                    <p className="font-oswald italic text-white underline lg:text-5xl sm:mx-2 sm:text-2xl text-center w-screen">Technology</p>
+                    {props.project.technology?.map(technology => {
                         return(
-                            <button onClick={()=> setImageIterator(index)} className="text-white lg:mx-4 sm:mx-2 sm:text-xs">&#9675;</button>
+                            <motion.div key={technology.children[0].text} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }}>
+                                <p className="font-oswald text-white text-center lg:text-2xl lg:my-5 lg:mx-5 sm:my-2 sm:mx-4 sm:text-xl">{technology.children[0].text}</p>
+                            </motion.div>
                         )
-                    }
-                })}
-            </div>
-            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }} className="flex flex-row justify-center mx-auto lg:mt-10 lg:px-32 sm:mt-4">
-                {props.project.shortDescription?.map(description => {
-                    return(
-                        <motion.div key={description.children[0].text} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }}>
-                            <p className="font-oswald text-white lg:text-3xl sm:mx-2 sm:text-xl text-center">{description.children[0].text}</p>
-                        </motion.div>
-                    )
-                })}
-            </motion.div>
-            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }} className="flex flex-row flex-wrap w-screen lg:mt-10 lg:px-32 sm:mt-4">
-                <p className="font-oswald italic text-white underline lg:text-5xl sm:mx-2 sm:text-2xl text-center w-screen">Features</p>
-                {props.project.features?.map(feature => {
-                    return(
-                        <motion.div key={feature.children[0].text} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }}>
-                            <p className="font-oswald text-white text-left lg:text-2xl lg:my-5 sm:my-2 sm:mx-2 sm:px-2 sm:text-xl">{feature.children[0].text}</p>
-                        </motion.div>
-                    )
-                })}
-            </motion.div>
-            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }} className="flex flex-row flex-wrap justify-center w-screen mx-auto lg:mt-10 lg:px-32 sm:mt-4 sm:pb-5">
-                <p className="font-oswald italic text-white underline lg:text-5xl sm:mx-2 sm:text-2xl text-center w-screen">Technology</p>
-                {props.project.technology?.map(technology => {
-                    return(
-                        <motion.div key={technology.children[0].text} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }}>
-                            <p className="font-oswald text-white text-center lg:text-2xl lg:my-5 lg:mx-5 sm:my-2 sm:mx-4 sm:text-xl">{technology.children[0].text}</p>
-                        </motion.div>
-                    )
-                })}
+                    })}
+                </motion.div>
             </motion.div>
         </div>
         
