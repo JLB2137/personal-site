@@ -156,7 +156,9 @@ const Project = (props: Props) => {
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }} className="bg-black">
                 <div className="grid justify-center lg:pt-10 sm:pt-5 sm:mx-2 overflow-hidden">
                     <motion.div className="lg:px-96" drag="x" dragConstraints={{ left: 0, right: 0 }} onDragStart={(event, info) => positionLocator(info)} onDragEnd={(event, info) => onDrag(info)}>
-                        <Image className="border-white sm:border-8 sm:h-96" quality={25} priority={true} width={props.imageWidthPDP} height={props.imageHeightPDP} src={image ? image : "/github.png"} layout='intrinsic' />
+                        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} key={image} viewport={{ once: true }} transition={{ duration: 1 }} className="bg-black">
+                            <Image className="border-white sm:border-8 sm:h-96" quality={25} priority={true} width={props.imageWidthPDP} height={props.imageHeightPDP} src={image ? image : "/github.png"} layout='intrinsic' />
+                        </motion.div>
                     </motion.div> 
                 </div>
                 <div className="flex flex-row justify-center w-max mx-auto sm:mt-4">

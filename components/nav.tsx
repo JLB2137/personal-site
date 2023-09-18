@@ -66,7 +66,7 @@ const Nav = (props: Props) => {
                     <div className="grid justify-end align-middle text-white sm:col-span-5 sm:mr-2" >
                         <div className='grid w-max align-middle'>
                             <Link href="/">
-                                <a id="name" className='font-oswald text-6xl font-name sm:text-5xl sm:w-fit sm:h-fit sm:-mb-4 sm:mx-auto sm:font-name'>JEREMEE</a>
+                                <a id="name" className='font-oswald text-6xl sm:text-5xl sm:w-fit sm:h-fit sm:-mb-4 sm:mx-auto sm:font-name'>JEREMEE</a>
                             </Link>
                             <p className="font-oswald text-lg mx-auto sm:text-xs">E-Commerce Specialist, Engineer, Plant Dad</p>
                         </div>
