@@ -150,12 +150,12 @@ const Project = (props: Props) => {
             <div className='flex col-span-2 justify-left items-center ml-32 sm:ml-2 sm:mb-3'>
                 <a className='font-oswald text-white font-bold text-7xl sm:text-3xl' href={props.project.projectURL} target="_blank" rel="noreferrer">{props.project.projectName}</a>
                 <a className='font-oswald mx-3 flex' href={props.project.gitURL} target="_blank" rel="noreferrer">
-                  <Image className="invert" src="/github.png" width={props.githubWidth} height={props.githubHeight} layout="fixed" />
+                  <Image className="invert" src="/github.png" quality={25} width={props.githubWidth} height={props.githubHeight} layout="fixed" />
                 </a>
             </div>
             <div className="grid justify-center lg:pt-10 sm:pt-5 sm:mx-2 overflow-hidden">
                 <motion.div className="lg:px-96" drag="x" dragConstraints={{ left: 0, right: 0 }} onDragStart={(event, info) => positionLocator(info)} onDragEnd={(event, info) => onDrag(info)}>
-                    <Image className="border-white sm:border-8 sm:h-96" width={props.imageWidthPDP} height={props.imageHeightPDP} src={image ? image : "/github.png"} layout='intrinsic' />
+                    <Image className="border-white sm:border-8 sm:h-96" quality={25} priority={true} width={props.imageWidthPDP} height={props.imageHeightPDP} src={image ? image : "/github.png"} layout='intrinsic' />
                 </motion.div> 
             </div>
             <div className="flex flex-row justify-center w-max mx-auto sm:mt-4">

@@ -109,9 +109,9 @@ const Portfolio = (props: Props) => {
   const [projectPLPImage,setProjectPLPImage] = useState(props.images)
 
 
-  useEffect(()=> {
-    console.log("hook results", projectPLPImage)
-  },[])
+  //useEffect(()=> {
+  //  console.log("hook results", projectPLPImage)
+  //},[])
   
   
   
@@ -125,7 +125,7 @@ const Portfolio = (props: Props) => {
   const onTap = () => {
     if (opacityChanger === true) {
       setOpacityChanger(false)
-      console.log("false")
+      //console.log("false")
     } else {
       setOpacityChanger(true)
     }
@@ -156,7 +156,7 @@ const Portfolio = (props: Props) => {
                 {props.screenWidth === 'mobile' ?
                   <motion.div className='px-5' initial="visible" animate={opacityChanger ? "visible" : "darker"} variants={variants} transition={{ type: "spring", duration: 0.8 }} onTap={onTap}>
                     <div className='flex mx-auto'>
-                      <Image src={projectPLPImage[imageIndex].image} width={props.imageWidthPLP} height={props.imageHeightPLP} layout="intrinsic"/>
+                      <Image src={projectPLPImage[imageIndex].image} loading="lazy" quality={25} width={props.imageWidthPLP} height={props.imageHeightPLP} layout="intrinsic"/>
                     </div>
                   </motion.div>
 
@@ -164,7 +164,7 @@ const Portfolio = (props: Props) => {
 
                   <motion.div className='sm:px-5' initial="visible" animate={opacityChanger ? "visible" : "darker"} variants={variants} transition={{ type: "spring", duration: 0.8 }} onHoverStart={onTap}>
                     <div className='flex mx-auto'>
-                      <Image src={projectPLPImage[imageIndex].image} width={props.imageWidthPLP} height={props.imageHeightPLP} layout="intrinsic"/>
+                      <Image src={projectPLPImage[imageIndex].image} width={props.imageWidthPLP} loading="lazy" quality={25} height={props.imageHeightPLP} layout="intrinsic"/>
                     </div>
                   </motion.div>
 
