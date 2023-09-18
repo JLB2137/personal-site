@@ -151,21 +151,25 @@ const Portfolio = (props: Props) => {
             }
           })
           return(
+            
             <div key={project.projectName} className='justify-center mx-auto text-white lg:pt-10 sm:grid sm:grid-cols-2 sm:mt-5 sm:h-max'>
               <div className='flex relative lg:flex-wrap sm:col-span-2 sm:h-full'>
                 {props.screenWidth === 'mobile' ?
-                  <motion.div className='px-5' initial="visible" animate={opacityChanger ? "visible" : "darker"} variants={variants} transition={{ type: "spring", duration: 0.8 }} onTap={onTap}>
-                    <div className='flex mx-auto'>
-                      <Image src={projectPLPImage[imageIndex].image} loading="lazy" quality={25} width={props.imageWidthPLP} height={props.imageHeightPLP} layout="intrinsic"/>
-                    </div>
+                  <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }}>
+                    <motion.div className='px-5' initial="visible" animate={opacityChanger ? "visible" : "darker"} variants={variants} transition={{ type: "spring", duration: 0.8 }} onTap={onTap}>
+                      <div className='flex mx-auto'>
+                        <Image src={projectPLPImage[imageIndex].image} loading="lazy" quality={25} width={props.imageWidthPLP} height={props.imageHeightPLP} layout="intrinsic"/>
+                      </div>
+                    </motion.div>
                   </motion.div>
 
                   :
-
-                  <motion.div className='sm:px-5' initial="visible" animate={opacityChanger ? "visible" : "darker"} variants={variants} transition={{ type: "spring", duration: 0.8 }} onHoverStart={onTap}>
-                    <div className='flex mx-auto'>
-                      <Image src={projectPLPImage[imageIndex].image} width={props.imageWidthPLP} loading="lazy" quality={25} height={props.imageHeightPLP} layout="intrinsic"/>
-                    </div>
+                  <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }}>
+                    <motion.div className='sm:px-5' initial="visible" animate={opacityChanger ? "visible" : "darker"} variants={variants} transition={{ type: "spring", duration: 0.8 }} onHoverStart={onTap}>
+                      <div className='flex mx-auto'>
+                        <Image src={projectPLPImage[imageIndex].image} width={props.imageWidthPLP} loading="lazy" quality={25} height={props.imageHeightPLP} layout="intrinsic"/>
+                      </div>
+                    </motion.div>
                   </motion.div>
 
                 }
