@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     fontFamily: {
       "header": ["Helvetica"],
-      "name": ["Arial Black"],
+      "name": ["Arial Black, Arial Bold MT"],
       "oswald": ['Oswald']
     },
     fontSize: {
