@@ -68,7 +68,7 @@ const Nav = (props: Props) => {
                             <Link href="/">
                                 <a id="name" className='font-name text-6xl sm:text-5xl sm:w-fit sm:h-fit sm:-mb-4 sm:mx-auto sm:font-name'>JEREMEE</a>
                             </Link>
-                            <p className="font-oswald text-lg mx-auto sm:text-xs">E-Commerce Specialist, Engineer, Plant Dad</p>
+                            <p className="font-oswald text-lg mx-auto sm:text-xs">E-Commerce QA Manager, Engineer, Plant Dad</p>
                         </div>
                     </div>
                     
