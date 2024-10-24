@@ -108,6 +108,19 @@
   margin-left: 0.5rem;
 }
 
+.hover-outline {
+  transition: text-shadow 0.3s ease; /* Smooth transition */
+}
+
+.hover-outline:hover {
+  text-shadow: 
+    -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000; /* Creates the outline effect */
+}
+
+
 
 @media (max-width: 600px) {
   .grid {

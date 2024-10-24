@@ -43,7 +43,30 @@ module.exports = {
     backgroundImage: {
       'hero': "url('/home_image.jpg')",
     },
-    extend: {},
+    extend: {
+        keyframes: {
+          shake: {
+            '0%, 100%': { transform: 'translateX(0)' },
+            '25%': { transform: 'translateX(-3px)' },
+            '50%': { transform: 'translateX(3px)' },
+            '75%': { transform: 'translateX(-3px)' },
+          },
+        },
+        animation: {
+          shake: 'shake 0.3s ease-in-out', // Define the shake duration and ease
+        },
+    }
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      const newUtilities = {
+        '.text-outline-black': {
+          textShadow: '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000'
+        }
+      }
+      addUtilities(newUtilities, ['responsive', 'hover'])
+    }
+  ],
+  // tailwind.config.js
+
 }
