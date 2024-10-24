@@ -51,10 +51,21 @@ module.exports = {
             '50%': { transform: 'translateX(3px)' },
             '75%': { transform: 'translateX(-3px)' },
           },
+          slide: {
+            '0%, 100%': { transform: 'translateX(0)' },
+            '50%': { transform: 'translateX(20px)' },
+          },
+          lift: {
+            '0%': { transform: 'translateY(0)' },
+            '50%': { transform: 'translateY(-10px)' },
+            '100%': { transform: 'translateY(0)' },
+          }
         },
         animation: {
-          shake: 'shake 0.3s ease-in-out', // Define the shake duration and ease
-        },
+          slide: 'slide 0.5s ease-in-out',
+          shake: 'shake 0.5s ease-in-out',
+          lift: 'lift 0.5s ease-in-out',
+        }
     }
   },
   plugins: [
