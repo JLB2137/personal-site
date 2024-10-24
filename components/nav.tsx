@@ -42,7 +42,7 @@ const Nav = (props: Props) => {
     const fadeInCheck = () => (props.navOpen ? "visible" : "hidden");
 
     // Define animation variants for sliding, shaking, and lifting
-    const animations = {
+    const slideShakeLift = {
         slide: {
             x: [0, 20, -20, 0],
             transition: { duration: 0.5, ease: 'easeInOut' }
@@ -57,18 +57,22 @@ const Nav = (props: Props) => {
         }
     };
 
-    // Randomly pick one of the animations
-    const getRandomAnimation = () => {
-        const keys = Object.keys(animations);
-        return keys[Math.floor(Math.random() * keys.length)];
+    // Randomly pick one of the animations, ensuring it's different from the current one
+    const getRandomAnimation = (current: string) => {
+        const keys = Object.keys(slideShakeLift);
+        let newAnimation;
+        do {
+            newAnimation = keys[Math.floor(Math.random() * keys.length)];
+        } while (newAnimation === current); // Ensure the new animation is different
+        return newAnimation;
     };
 
     // Use state to control the current animation variant
-    const [animation, setAnimation] = useState(getRandomAnimation());
+    const [randomAnimation, setRandomAnimation] = useState(getRandomAnimation(''));
 
     // Handle hover to assign a random animation
     const handleMouseEnter = () => {
-        setAnimation(getRandomAnimation());
+        setRandomAnimation(getRandomAnimation(randomAnimation));
     };
 
     return (
@@ -101,7 +105,7 @@ const Nav = (props: Props) => {
                                     id="name"
                                     className='font-name text-6xl sm:text-5xl sm:w-fit sm:h-fit sm:-mb-4 sm:mx-auto sm:font-name cursor-pointer'
                                     onMouseEnter={handleMouseEnter}
-                                    animate={animations[animation]} // Use the random animation variant
+                                    animate={slideShakeLift[randomAnimation]} // Use the random animation variant
                                 >
                                     JEREMEE
                                 </motion.a>
